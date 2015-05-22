@@ -2,14 +2,10 @@ import java.util.*;
 
 class Dungeon{
     
-    protected Tile center;
-    protected int size;
-    
-    Dungeon(int size){
+    protected Tile[][] map;
+        
+    Dungeon(){
       Random r = new Random();
-      int counter = 2;
-      int 
       
-      this.size=size;
     }
 }
