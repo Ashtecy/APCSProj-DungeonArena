@@ -2,24 +2,31 @@ import java.util.*;
 
 class Tile{
   
-    protected Tile[]=new Tile[4];
-    
-    protected boolean wall;
-    
-    Tile(boolean wall){
-      this.wall=wall;
+  protected boolean wall;
+  protected float x,y;
+  protected color c;
+  
+  Tile(int x,int y,int n){
+    this.x=x;
+    this.y=y;
+    if(n!=0){
+      wall=false;
+    }else{
+      wall=true;
     }
-    
-    Tile getNext(int n){
-    if(n==0){
-      return Tile[0];
+    if(wall){  
+      c=color(0,0,255);
     }
-    if(n==1){
-      return Tile[1];
+  }
+  
+  void draw(){
+    if(wall){
+      stroke(c);
+      fill(c);
+    }else{
+      stroke(0);
+      fill(255);
     }
-    if(n==2){
-      return Tile[2];
-    }
-    if(n==1){
-      return Tile[3];
-    }    
+    rect(x,y,32,32);
+  }
+}
