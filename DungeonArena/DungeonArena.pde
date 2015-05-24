@@ -19,9 +19,7 @@ void draw(){
     play.draw();
     if(mousePressed){
       if(play.getIsOver()){
-        background(0);
-        PImage L = loadImage("loading.png");
-        image(L,625,675,300,60);
+        loadingScreen();
         MODE=1;
       }
     }
@@ -30,3 +28,18 @@ void draw(){
     arena.draw();
   }
 }
+  
+void keyPressed(){
+  if(keyCode==8 && MODE==1){
+    loadingScreen();
+    MODE=0;
+  }
+}
+  
+  
+void loadingScreen(){
+  background(0);
+  PImage L = loadImage("loading.png");
+  image(L,625,675,300,60);
+}
+
