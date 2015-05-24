@@ -21,7 +21,7 @@ class Tile{
   
   void draw(){
     Random r = new Random();
-
+    imageMode(CORNER);
     if(isWall){
       PImage wall=loadImage("wall.png");
       image(wall,x,y,64,64);

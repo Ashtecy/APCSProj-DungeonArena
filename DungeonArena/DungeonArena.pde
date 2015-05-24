@@ -8,14 +8,6 @@ void setup(){
   MODE=0;
 }
 
-void keyPressed(){
-  if(keyCode==32){
-    MODE=1;
-  }
-}
-  
-    
-
 void draw(){
   if(MODE==0){
     background(0);
@@ -25,8 +17,19 @@ void draw(){
     image(Title,50,150,850,150);
     Button play = new Button(P1,P2,350,350);
     play.draw();
+    if(mousePressed){
+      if(play.getIsOver()){
+        background(0);
+        imageMode(CENTER);
+        PImage L = loadImage("loading.png");
+        image(L,480,384,500,175);
+        MODE=1;
+      }
+    }
   }
   else if(MODE==1){
+    background(0);
+    PImage L = loadImage("loading.png");
     arena.draw();
   }
 }
