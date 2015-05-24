@@ -26,5 +26,8 @@ A working dungeon with random equipment and monsters.
 Change Log
 
 May 23,2015
-  Basic Dungeon Generation: Running displays a basic 20 by 25 tile dungeon in which approximately one third of the tiles are walls. To go on from here, could either begin testing monster and item spawning or imporve dungeon generation.  -Raashid
+  Basic Dungeon Generation: Running displays a basic 20 by 25 tile dungeon in which approximately one third of the tiles are walls. To go on from here, could either begin testing monster and item spawning or imporve dungeon generation. 
+  Played around with branching.
+  Started work on the menu screen with a play button and implemented a loading screen. 
+-Raashid
 
