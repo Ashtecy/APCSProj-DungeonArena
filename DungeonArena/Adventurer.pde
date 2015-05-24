@@ -42,7 +42,7 @@ class Adventurer extends Being {
   }
 
   void stamp() {
-    //implementation requires use of graphics and maps
+    ellipse(getX(), getY(), 20, 20);
   }
 }
 
