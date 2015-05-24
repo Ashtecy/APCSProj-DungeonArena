@@ -12,7 +12,8 @@ class Button{
    }
   
   void draw(){
-    if (mouseX>x && mouseX<x+w && mouseY>y && mouseY<y+h){
+    imageMode(CENTER);
+    if (mouseX>x-(w/2) && mouseX<x+(w/2) && mouseY>y-(h/2) && mouseY<y+(h/2)){
       isOver=true;
       image(text2,x,y,w,h);
     }else{
