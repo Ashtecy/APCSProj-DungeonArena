@@ -10,7 +10,7 @@ void setup(){
 
 void keyPressed(){
   if(keyCode==32){
-    MODE==1
+    MODE=1;
   }
 }
   
@@ -19,11 +19,10 @@ void keyPressed(){
 void draw(){
   if(MODE==0){
     background(0);
-    textSize(48);
-    text("DUNGEON ARENA",300,100);
-    fill(255,0,0);
+    PImage Title = loadImage("Title.png");
+    image(Title,50,300,850,150);
   }
   else if(MODE==1){
-  arena.draw();
+    arena.draw();
   }
 }
