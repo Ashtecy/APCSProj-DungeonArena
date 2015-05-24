@@ -1,6 +1,7 @@
 
-protected Dungeon arena = new Dungeon();
+protected Dungeon arena;
 protected int MODE;
+protected long seed;
 
 protected  PImage L;
 
@@ -14,6 +15,7 @@ void setup(){
 void draw(){
   if(MODE==0){
     background(0);
+    arena = new Dungeon(seed);
     PImage Title = loadImage("Title.png");
     PImage P1 = loadImage("play1.png");
     PImage P2 = loadImage("play2.png");
@@ -35,6 +37,7 @@ void draw(){
   
 void keyPressed(){
   if(keyCode==8 && MODE==1){
+    seed=System.currentTimeMillis();
     MODE=0;
   }
 }
