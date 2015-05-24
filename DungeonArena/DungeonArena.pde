@@ -20,7 +20,7 @@ void draw(){
   if(MODE==0){
     background(0);
     PImage Title = loadImage("Title.png");
-    image(Title,50,300,850,150);
+    image(Title,50,200,850,150);
   }
   else if(MODE==1){
     arena.draw();
