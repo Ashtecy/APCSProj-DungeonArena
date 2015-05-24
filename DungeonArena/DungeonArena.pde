@@ -20,16 +20,13 @@ void draw(){
     if(mousePressed){
       if(play.getIsOver()){
         background(0);
-        imageMode(CENTER);
         PImage L = loadImage("loading.png");
-        image(L,480,384,500,175);
+        image(L,625,675,300,60);
         MODE=1;
       }
     }
   }
   else if(MODE==1){
-    background(0);
-    PImage L = loadImage("loading.png");
     arena.draw();
   }
 }
