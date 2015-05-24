@@ -2,31 +2,35 @@ import java.util.*;
 
 class Tile{
   
-  protected boolean wall;
+  protected boolean isWall;
   protected float x,y;
-  protected color c;
   
   Tile(int x,int y,int n){
     this.x=x;
     this.y=y;
     if(n!=0){
-      wall=false;
+      isWall=false;
     }else{
-      wall=true;
-    }
-    if(wall){  
-      c=color(0,0,255);
+      isWall=true;
     }
   }
   
+  boolean isWall(){
+    return isWall;
+  }
+  
   void draw(){
-    if(wall){
-      stroke(c);
-      fill(c);
+    Random r = new Random();
+
+    if(isWall){
+      PImage wall=loadImage("wall.png");
+      image(wall,x,y,64,64);
+      
     }else{
-      stroke(0);
-      fill(255);
+      PImage floor=loadImage("floor.png");
+      image(floor,x,y,64,64);
+      
     }
-    rect(x,y,32,32);
   }
 }
+
