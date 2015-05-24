@@ -1,18 +1,18 @@
-abstract class Being {
+abstract class Being extends MapObject {
   private String name;
-  private int maxHP, HP, STR, DEX, INT;
+  private int maxHP, HP;
+  private boolean isAlive;
 
   Being() {
-    this("", 10, 10, 10, 10);
+    this("", 10, 10, 10);
   }
 
-  Being(String n, int h, int str, int dex, int man) {
+  Being(String n, int h, int x, int y) {
+    super(x,y);
     setName(n);
     setMaxHP(h);
     setHP(h);
-    setSTR(10);
-    setDEX(10);
-    setINT(10);
+    isAlive = true;
   }
 
   String getName() {
@@ -21,18 +21,6 @@ abstract class Being {
 
   int getHP() {
     return HP;
-  }
-
-  int getSTR() {
-    return STR;
-  }
-
-  int getDEX() {
-    return DEX;
-  }
-
-  int getINT() {
-    return INT;
   }
 
   int getMaxHP() {
@@ -47,18 +35,6 @@ abstract class Being {
     HP = newHP;
   }
 
-  void setSTR(int s) {
-    STR = s;
-  }
-
-  void setDEX(int d) {
-    DEX = d;
-  }
-
-  void setINT(int i) {
-    INT = i;
-  }
-
   void setMaxHP(int h) {
     maxHP = h;
   }
@@ -68,14 +44,12 @@ abstract class Being {
   }
 
   String getStats() {
-    return getName() + " " + getHP() + " HP\n " + " STR: " + getSTR()  + " DEX: " + getDEX() + " INT: " + getINT();
+    return getName() + " " + getHP() + " HP";
   }
-  
-  abstract void stamp();
 
-  abstract void reset();
-
-  abstract void rest();
+  void move(int x, int y) {
+    setXY(x, y);
+  }
 
   abstract void attack(Being other);
 }     
