@@ -3,6 +3,8 @@ protected Dungeon arena;
 protected int MODE;
 protected long seed;
 
+protected int tileSize=64;
+
 protected  PImage L;
 
 void setup(){
@@ -15,7 +17,7 @@ void setup(){
 void draw(){
   if(MODE==0){
     background(0);
-    arena = new Dungeon(seed);
+    arena = new Dungeon(seed,tileSize);
     PImage Title = loadImage("Title.png");
     PImage P1 = loadImage("play1.png");
     PImage P2 = loadImage("play2.png");
@@ -46,6 +48,6 @@ void keyPressed(){
 void loadingScreen(){
   background(0);
   imageMode(CORNER);
-  image(L,625,675,300,60);
+  image(L,625,690,300,60);
 }
 

@@ -1,9 +1,13 @@
-abstract class MapObject {
+class MapObject {
 
-  private int xpos, ypos;
+  private int xpos, ypos,tileRadius;
+  protected String name;
+  protected PImage W;
 
-  MapObject(int x, int y) {
+  MapObject(int x, int y,int tileSize) {
     setXY(x, y);
+    name="Axe of Test Cases";
+    tileRadius=tileSize/2;
   }
 
   int getX () {
@@ -26,7 +30,13 @@ abstract class MapObject {
     setX(newX);
     setY(newY);
   }
+  
+  void draw(){
+    imageMode(CENTER);
+    W=loadImage("mace.png");
+    image(W,xpos+tileRadius,ypos+tileRadius,tileRadius,tileRadius);
+  }
 
-  abstract void stamp();
+  //abstract void stamp();
 }
 

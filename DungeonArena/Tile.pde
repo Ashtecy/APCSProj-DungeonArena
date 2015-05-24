@@ -5,19 +5,21 @@ class Tile{
   protected boolean isWall;
   protected float x,y;
   protected Random r;
+  protected int tileSize;
   
-  protected Weapon[] drops;
+  protected ArrayList<MapObject> drops;
   
-  Tile(int x,int y,int n){
+  Tile(int x,int y,int n,int tileSize){
     this.x=x;
     this.y=y;
+    this.tileSize=tileSize;
     if(n!=0){
       isWall=false;
       r = new Random();
-      drops=new Weapon[5];
+      drops=new ArrayList<MapObject>();
       if(r.nextInt(15)==0){
-        Weapon drop = new Weapon(x,y,64);
-        drops[0]=drop;
+        MapObject drop = new MapObject(x,y,tileSize);
+        drops.add(drop);
       }
     }else{
       isWall=true;
@@ -32,12 +34,12 @@ class Tile{
     imageMode(CORNER);
     if(isWall){
       PImage wall=loadImage("wall.png");
-      image(wall,x,y,64,64);
+      image(wall,x,y,tileSize,tileSize);
     }else{
       PImage floor=loadImage("floor.png");
-      image(floor,x,y,64,64);
-      if(drops[0]!=null){
-        drops[0].draw();
+      image(floor,x,y,tileSize,tileSize);
+      for(MapObject o:drops){
+        o.draw();
       }
     } 
   }

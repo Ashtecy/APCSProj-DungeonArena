@@ -1,11 +1,11 @@
 
-class Weapon{
+class DungeonObject{
   
   protected String name;
   protected PImage W;
   protected float x,y,tileRadius;
   
-  Weapon(int x,int y,int tileSize){
+  DungeonObject (int x,int y,int tileSize){
     name="Axe of Test Cases";
     this.x=x;
     this.y=y;
