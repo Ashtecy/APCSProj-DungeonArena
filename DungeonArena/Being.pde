@@ -8,7 +8,7 @@ abstract class Being extends MapObject {
   }
 
   Being(String n, int h, int x, int y) {
-    super(x,y,64);
+    super(x, y, 64);
     setName(n);
     setMaxHP(h);
     setHP(h);
@@ -52,5 +52,13 @@ abstract class Being extends MapObject {
   }
 
   abstract void attack(Being other);
+
+  void die() {
+    //drop an item
+  }
+
+  void drop(MapObject loot) {
+    //spawn new item
+  }
 }     
 
