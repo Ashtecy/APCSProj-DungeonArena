@@ -5,22 +5,28 @@ protected long seed;
 
 protected int tileSize=64;
 
-protected  PImage L;
+protected PImage Title;
+protected PImage P1;
+protected PImage P2;
+protected PImage L;
+protected PImage S;
+
 
 void setup(){
   size(960,768);
   background(255);
   MODE=0;
-  L=loadImage("loading.png");
+  Title = loadImage("Title.png");
+  P1 = loadImage("play1.png");
+  P2 = loadImage("play2.png");
+  L = loadImage("loading.png");
+  S = loadImage("side.png");
 }
 
 void draw(){
   if(MODE==0){
     background(0);
     arena = new Dungeon(seed,tileSize);
-    PImage Title = loadImage("Title.png");
-    PImage P1 = loadImage("play1.png");
-    PImage P2 = loadImage("play2.png");
     imageMode(CENTER);
     image(Title,480,150,850,120);
     Button play = new Button(P1,P2,480,350);
@@ -34,6 +40,8 @@ void draw(){
   }
   else if(MODE==1){
     arena.draw();
+    sideScreen();
+    
   }
 }
   
@@ -51,3 +59,14 @@ void loadingScreen(){
   image(L,625,690,300,60);
 }
 
+void sideScreen(){
+  for(int i=0;i<768;i+=128){
+    for(int j=576;j<960;j+=128){
+      imageMode(CORNER);
+      image(S,j,i,128,128);
+    }
+  }      
+  imageMode(CENTER);
+  image(Title,768,100,250,100);
+  
+}
