@@ -1,13 +1,20 @@
 class Adventurer extends Being {
 
   private int STR, DEX, INT;
+  protected PImage guy;
 
-  Adventurer(String name, int h, int x, int y, int str, int dex, int in) {
-    super(name, h, x, y);
+  Adventurer(String name, int x, int y, int str, int dex, int in) {
+    super(name, x, y);
     setSTR(str);
     setDEX(dex);
     setINT(in);
+    guy = loadImage("man.png");
   }
+  
+  Adventurer(String name,int x,int y){
+     this(name,x,y,10,10,10);
+  }
+     
 
   int getSTR() {
     return STR;
@@ -43,6 +50,8 @@ class Adventurer extends Being {
 
   void stamp() {
     ellipse(getX(), getY(), 20, 20);
-  }
+  }  void draw(eMode(CENTER);
+    image(guy,x+tileRadius,,tileRadius,tileRadius);
+    
 }
 

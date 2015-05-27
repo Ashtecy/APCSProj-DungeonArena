@@ -7,11 +7,11 @@ abstract class Being extends MapObject {
     this("", 10, 10, 10);
   }
 
-  Being(String n, int h, int x, int y) {
+  Being(String n, int x, int y) {
     super(x,y,64);
     setName(n);
-    setMaxHP(h);
-    setHP(h);
+    setMaxHP(20);
+    setHP(20);
     isAlive = true;
   }
 

@@ -2,8 +2,10 @@
 protected Dungeon arena;
 protected int MODE;
 protected long seed;
+protected Random r =  new Random();
 
 protected int tileSize=64;
+
 
 protected PImage Title;
 protected PImage P1;
@@ -26,7 +28,7 @@ void setup(){
 void draw(){
   if(MODE==0){
     background(0);
-    arena = new Dungeon(seed,tileSize);
+    arena = new Dungeon(12,15,seed,tileSize);
     imageMode(CENTER);
     image(Title,480,150,850,120);
     Button play = new Button(P1,P2,480,350);
@@ -40,7 +42,7 @@ void draw(){
   }
   else if(MODE==1){
     arena.draw();
-    sideScreen();
+    //sideScreen();
     
   }
 }
@@ -67,6 +69,6 @@ void sideScreen(){
     }
   }      
   imageMode(CENTER);
-  image(Title,768,100,250,100);
+  image(Title,768,100,300,100);
   
 }
