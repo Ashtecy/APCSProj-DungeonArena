@@ -1,6 +1,6 @@
 class Inventory {
 
-  //Equiptment helm, arms, legs, chest, weapon;
+  protected Item helm, arms, legs, chest, weapon;
   protected ArrayList<Item> items;
   protected int cap;
 
@@ -19,6 +19,26 @@ class Inventory {
 
   void drop (int inInd) {
     items.remove(inInd);
+  }
+
+  Item getHelm() {
+    return helm;
+  }
+
+  Item getArms() {
+    return arms;
+  }
+
+  Item getLegs() {
+    return legs;
+  }
+
+  Item getChest() {
+    return chest;
+  }
+
+  Item getWeapon() {
+    return weapon;
   }
 }
 
