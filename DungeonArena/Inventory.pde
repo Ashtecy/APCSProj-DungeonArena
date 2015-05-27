@@ -1,22 +1,24 @@
 class Inventory {
 
-  //Equiptment head, arms, legs, chest, weapon;
-  protected Item[] items;
-  protected int itemCount;
+  //Equiptment helm, arms, legs, chest, weapon;
+  protected ArrayList<Item> items;
+  protected int cap;
 
   Inventory (int size) {
-    head = arms = legs = chest = weapon = null;
-    items = new Item[size];
-    itemCount = 0;
+    //helm = arms = legs = chest = weapon = null;
+    cap = 0;
   }
 
-  void add (Item i) {
-    if (itemCount < items.length) {
-      items[itemCount] = i;
-      itemCount++;
-    }else{
-      
-    }
+  boolean add (Item i) {
+    if (cap > items.size()) {
+      items.add(i);
+      return true;
+    }    
+    return false;
+  }
+
+  void drop (int inInd) {
+    items.remove(inInd);
   }
 }
 
