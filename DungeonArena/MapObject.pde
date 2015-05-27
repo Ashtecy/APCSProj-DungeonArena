@@ -1,12 +1,12 @@
 class MapObject {
 
-  private int xpos, ypos,tileRadius;
+  private int xpos, ypos, tileRadius;
   protected String name;
   protected PImage W;
 
-  MapObject(int x, int y,int tileSize) {
+  MapObject(String name, int x, int y, int tileSize) {
     setXY(x, y);
-    name="Axe of Test Cases";
+    this.name = name;
     tileRadius=tileSize/2;
   }
 
@@ -30,11 +30,11 @@ class MapObject {
     setX(newX);
     setY(newY);
   }
-  
-  void draw(){
+
+  void draw() {
     imageMode(CENTER);
     W=loadImage("mace.png");
-    image(W,xpos+tileRadius,ypos+tileRadius,tileRadius,tileRadius);
+    image(W, xpos+tileRadius, ypos+tileRadius, tileRadius, tileRadius);
   }
 
   //abstract void stamp();
