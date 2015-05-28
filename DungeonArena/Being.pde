@@ -4,7 +4,7 @@ abstract class Being extends MapObject {
   private boolean isAlive;
 
   Being() {
-    this("", 10, 10, 10);
+    this("", 10, 10);
   }
 
   Being(String n, int x, int y) {
@@ -49,6 +49,10 @@ abstract class Being extends MapObject {
 
   void move(int x, int y) {
     setXY(x, y);
+  }
+  
+  void draw(){
+    super.draw();
   }
 
   abstract void attack(Being other);

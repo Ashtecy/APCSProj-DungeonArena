@@ -52,6 +52,23 @@ void keyPressed(){
     seed=System.currentTimeMillis();
     MODE=0;
   }
+   if(keyCode==97){
+      arena.getGuy().setXY(arena.getGuy().getX()-tileSize,arena.getGuy().getY()+tileSize);  
+    }else if(keyCode==98){
+      arena.getGuy.getGuy()().guy.setY(getY()+tileSize);  
+    }else if(keyCode==99){
+      arena.getGuy().setXY(guy.getX()+tileSize,guy.getY()+tileSize);  
+    }else if(keyCode==100){
+      arena.getGuy().setX(guy.getX()-tileSize);  
+    }else if(keyCode==102){
+      arena.getGuy().setX(guy.getX()+tileSize);  
+    }else if(keyCode==103){
+      arena.getGuy().setXY(guy.getX()-tileSize,guy.getY()-tileSize);  
+    }else if(keyCode==104){
+      arena.getGuy().setY(guy.getY()-tileSize);  
+    }else if(keyCode==105){
+      arena.getGuy().setXY(guy.getX()+tileSize,guy.getY()-tileSize);  
+    }
 }
   
   
