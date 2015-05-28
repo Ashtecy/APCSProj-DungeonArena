@@ -2,10 +2,12 @@ class Adventurer extends Being {
 
   private int STR, DEX, INT, LVL, EXP, PTS;
   private Inventory in;
+  private Stats stats;
 
   Adventurer(String name, int h, int x, int y) {
     this(name, h, x, y, 10, 10, 10);
     in = new Inventory(20);
+    stats = new Stats(10, 10, 10);
   }
 
   Adventurer(String name, int h, int x, int y, int str, int dex, int in) {

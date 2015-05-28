@@ -1,11 +1,11 @@
 class Inventory {
 
-  protected Item helm, arms, legs, chest, weapon;
+  protected Equiptment helm, arms, legs, chest, weapon;
   protected ArrayList<Item> items;
   protected int cap;
 
   Inventory (int size) {
-    //helm = arms = legs = chest = weapon = null;
+    helm = arms = legs = chest = weapon = null;
     cap = 0;
   }
 
@@ -21,23 +21,23 @@ class Inventory {
     items.remove(inInd);
   }
 
-  Item getHelm() {
+  Equiptment getHelm() {
     return helm;
   }
 
-  Item getArms() {
+  Equiptment getArms() {
     return arms;
   }
 
-  Item getLegs() {
+  Equiptment getLegs() {
     return legs;
   }
 
-  Item getChest() {
+  Equiptment getChest() {
     return chest;
   }
 
-  Item getWeapon() {
+  Equiptment getWeapon() {
     return weapon;
   }
 }
