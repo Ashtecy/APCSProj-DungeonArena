@@ -1,33 +1,31 @@
 class Adventurer extends Being {
 
-  private int STR, DEX, INT, LVL, EXP, PTS;
+  private int LVL, EXP, PTS;
   private Inventory in;
-  private Stats stats;
+  private Stats stats, equiptment;
 
   Adventurer(String name, int h, int x, int y) {
     this(name, h, x, y, 10, 10, 10);
     in = new Inventory(20);
-    stats = new Stats(10, 10, 10);
+    equiptment = new Stats(0, 0, 0);
   }
 
   Adventurer(String name, int h, int x, int y, int str, int dex, int in) {
     super(name, h, x, y);
-    setSTR(str);
-    setDEX(dex);
-    setINT(in);
+    stats = new Stats(str, dex, in);
     setEXP(0);
   }
 
   int getSTR() {
-    return STR;
+    return stats.getSTR() + equiptment.getSTR();
   }
 
   int getDEX() {
-    return DEX;
+    return stats.getDEX() + equiptment.getDEX();
   }
 
   int getINT() {
-    return INT;
+    return stats.getINT() + equiptment.getINT();
   }
 
   int getEXP() {
@@ -39,15 +37,15 @@ class Adventurer extends Being {
   }
 
   void setSTR(int s) {
-    STR = s;
+    stats.setSTR(s);
   }
 
   void setDEX(int d) {
-    DEX = d;
+    stats.setDEX(d);
   }
 
   void setINT(int i) {
-    INT = i;
+    stats.setINT(i);
   }
 
   void setLVL(int l) {
@@ -70,6 +68,12 @@ class Adventurer extends Being {
     if (in.add(it)) {
       it.pickUp();
     }
+  }
+
+  void updateEquiptment() {
+    equiptment.setSTR(in.getHelm().getSTR() + in.getArms().getSTR() + in.getLegs().getSTR() + in.getChest().getSTR() + in.getWeapon().getSTR());
+    equiptment.setDEX(in.getHelm().getDEX() + in.getArms().getDEX() + in.getLegs().getDEX() + in.getChest().getDEX() + in.getWeapon().getDEX());
+    equiptment.setINT(in.getHelm().getINT() + in.getArms().getINT() + in.getLegs().getINT() + in.getChest().getINT() + in.getWeapon().getINT());
   }
 
   void drop(int inInd) {

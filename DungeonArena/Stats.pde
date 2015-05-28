@@ -3,7 +3,7 @@ class Stats {
   private int STR, DEX, INT;
 
   Stats() {
-    this(0,0,0);
+    this(0, 0, 0);
   }
 
   Stats(int s, int d, int i) {

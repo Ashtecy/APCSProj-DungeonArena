@@ -6,6 +6,17 @@ class Equiptment extends Item {
     super("Equiptment", xi, yi, size);
     stats = new Stats();
   }
-  
+
+  int getSTR() {
+    return stats.getSTR();
+  }
+
+  int getDEX() {
+    return stats.getDEX();
+  }
+
+  int getINT() {
+    return stats.getINT();
+  }
 }
 
