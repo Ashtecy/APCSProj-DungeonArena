@@ -7,7 +7,7 @@ class Tile{
   protected Random r;
   protected int tileSize;
   
-  protected ArrayList<MapObject> drops;
+  protected ArrayList<Item> drops;
   
   Tile(int x,int y,int n,int tileSize){
     this.x=x;
@@ -16,9 +16,9 @@ class Tile{
     if(n!=0){
       isWall=false;
       r = new Random();
-      drops=new ArrayList<MapObject>();
+      drops=new ArrayList<Item>();
       if(r.nextInt(15)==0){
-        MapObject drop = new MapObject(x,y,tileSize);
+        Item drop = new Item("Axe of the Test Cases",x,y,tileSize);
         drops.add(drop);
       }
     }else{
@@ -38,7 +38,7 @@ class Tile{
     }else{
       PImage floor=loadImage("floor.png");
       image(floor,x,y,tileSize,tileSize);
-      for(MapObject o:drops){
+      for(Item o:drops){
         o.draw();
       }
     } 

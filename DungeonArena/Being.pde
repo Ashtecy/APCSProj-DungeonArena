@@ -1,15 +1,13 @@
 abstract class Being extends MapObject {
-  private String name;
   private int maxHP, HP;
   private boolean isAlive;
 
   Being() {
-    this("", 10, 10, 10);
+    this("Thing", 10, 10, 10);
   }
 
   Being(String n, int h, int x, int y) {
-    super(x, y, 64);
-    setName(n);
+    super(n, x, y, 64);
     setMaxHP(h);
     setHP(h);
     isAlive = true;

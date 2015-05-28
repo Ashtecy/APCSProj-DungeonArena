@@ -1,9 +1,11 @@
 class Adventurer extends Being {
 
   private int STR, DEX, INT, LVL, EXP, PTS;
+  private Inventory in;
 
   Adventurer(String name, int h, int x, int y) {
     this(name, h, x, y, 10, 10, 10);
+    in = new Inventory(20);
   }
 
   Adventurer(String name, int h, int x, int y, int str, int dex, int in) {
@@ -60,6 +62,16 @@ class Adventurer extends Being {
 
   void attack(Being other) {
     other.setHP(other.getHP() - getSTR());
+  }
+
+  void pickUp(Item it) {
+    if (in.add(it)) {
+      it.pickUp();
+    }
+  }
+
+  void drop(int inInd) {
+    in.drop(inInd);
   }
 
   String getStats() {
