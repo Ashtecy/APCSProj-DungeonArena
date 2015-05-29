@@ -18,5 +18,11 @@ class Equiptment extends Item {
   int getINT() {
     return stats.getINT();
   }
+
+  void applyBuffs(Stats base) {
+    base.setSTR(base.getSTR() + stats.getSTR());
+    base.setDEX(base.getDEX() + stats.getDEX());
+    base.setINT(base.getINT() + stats.getINT());
+  }
 }
 

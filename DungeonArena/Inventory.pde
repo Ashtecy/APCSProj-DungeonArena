@@ -6,7 +6,7 @@ class Inventory {
 
   Inventory (int size) {
     helm = arms = legs = chest = weapon = null;
-    cap = 0;
+    cap = size;
   }
 
   boolean add (Item i) {
@@ -18,7 +18,7 @@ class Inventory {
   }
 
   void drop (int inInd) {
-    items.remove(inInd);
+    items.remove(inInd).drop();
   }
 
   Equiptment getHelm() {

@@ -17,15 +17,15 @@ class Adventurer extends Being {
   }
 
   int getSTR() {
-    return stats.getSTR() + equiptment.getSTR();
+    return stats.getSTR();
   }
 
   int getDEX() {
-    return stats.getDEX() + equiptment.getDEX();
+    return stats.getDEX();
   }
 
   int getINT() {
-    return stats.getINT() + equiptment.getINT();
+    return stats.getINT();
   }
 
   int getEXP() {
@@ -70,10 +70,12 @@ class Adventurer extends Being {
     }
   }
 
-  void updateEquiptment() {
-    equiptment.setSTR(in.getHelm().getSTR() + in.getArms().getSTR() + in.getLegs().getSTR() + in.getChest().getSTR() + in.getWeapon().getSTR());
-    equiptment.setDEX(in.getHelm().getDEX() + in.getArms().getDEX() + in.getLegs().getDEX() + in.getChest().getDEX() + in.getWeapon().getDEX());
-    equiptment.setINT(in.getHelm().getINT() + in.getArms().getINT() + in.getLegs().getINT() + in.getChest().getINT() + in.getWeapon().getINT());
+  void updateStats() {
+    in.getHelm().applyBuffs(stats);
+    in.getLegs().applyBuffs(stats);
+    in.getArms().applyBuffs(stats);
+    in.getChest().applyBuffs(stats);
+    in.getWeapon().applyBuffs(stats);
   }
 
   void drop(int inInd) {

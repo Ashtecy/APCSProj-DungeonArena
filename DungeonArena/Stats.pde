@@ -35,5 +35,6 @@ class Stats {
   void setINT(int i) {
     INT = i;
   }
+  
 }
 
