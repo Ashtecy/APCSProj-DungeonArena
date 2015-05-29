@@ -1,7 +1,7 @@
 class MapObject {
 
   protected int rows=12,cols=15;
-  protected int xpos,ypos,tileSize;
+  protected int x,y,tileSize;
   protected String name;
   protected PImage W = loadImage("mace.png");
 
@@ -12,22 +12,22 @@ class MapObject {
   }
 
   int getX () {
-    return xpos;
+    return x;
   }
 
   int getY () {
-    return ypos;
+    return y;
   }
 
   void setX (int newX) {
     if(newX!=0 && newX!=cols*tileSize){
-      xpos = newX;
+      x = newX;
     }
   }
 
   void setY (int newY) {
     if(newY!=0 && newY!=rows*tileSize){
-      ypos = newY;
+      y = newY;
     }
   }
 
@@ -38,7 +38,7 @@ class MapObject {
   
   void draw(){
     imageMode(CENTER);
-    image(W,xpos+(tileSize/2),ypos+(tileSize/2),0.75*tileSize,0.75*tileSize);
+    image(W,x+(tileSize/2),y+(tileSize/2),0.75*tileSize,0.75*tileSize);
   }
 
   //abstract void stamp();

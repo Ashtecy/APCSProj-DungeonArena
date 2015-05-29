@@ -3,15 +3,13 @@ import java.util.*;
 class Tile{
   
   protected boolean isWall;
-  protected float x,y;
+  protected int x,y;
   protected Random r;
   protected int tileSize;
   
   protected ArrayList<MapObject> drops;
   
-  Tile(int x,int y,int n,int tileSize){
-    this.x=x;
-    this.y=y;
+  Tile(int n,int tileSize){
     this.tileSize=tileSize;
     if(n!=0){
       isWall=false;
@@ -24,6 +22,19 @@ class Tile{
     }else{
       isWall=true;
     }
+  }
+  
+  void setX (int newX) {
+      x = newX;
+  }
+
+  void setY (int newY) {
+      y = newY;
+  }
+
+  void setXY (int newX, int newY) {
+    setX(newX);
+    setY(newY);
   }
   
   boolean isWall(){
