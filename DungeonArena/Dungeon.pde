@@ -2,6 +2,7 @@ import java.util.*;
 
 class Dungeon{
   
+  protected Tile[][] camera;
   protected Tile[][] map;
   protected Adventurer guy;
   protected int rows,cols;
@@ -24,13 +25,21 @@ class Dungeon{
       int xPos=r.nextInt(rows-1)+1;
       int yPos=r.nextInt(cols-1)+1;
       if(!map[xPos][yPos].isWall()){
-        guy = new Adventurer("Guy",64*xPos,64*yPos);
+        guy = new Adventurer("Guy",tileSize*xPos,tileSize*yPos);
+      }
+    }
+    camera = new Tile[5][5];
+    int cX=(guy.getX()/64)-2;
+    int cY=(guy.getY()/64)-2;
+    for(int i=cX;i<=cX+4;i++){
+      for(int j=cY;j<=cY+4;j++){
+        camera[j-cY][i-cX]=map[j][i];
       }
     }
   }
 
   void draw(){
-    for(Tile[] e:map){
+    for(Tile[] e:camera){
       for(Tile f:e){
         f.draw();
       } 
