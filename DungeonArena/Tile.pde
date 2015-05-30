@@ -18,7 +18,7 @@ class Tile{
       r = new Random();
       drops=new ArrayList<Item>();
       if(r.nextInt(15)==0){
-        Item drop = new Item("Axe of the Test Cases",x,y,tileSize);
+        Item drop = new Item("Axe of the Test Cases",5,x,y,tileSize);
         drops.add(drop);
       }
     }else{

@@ -1,7 +1,7 @@
 class Adventurer extends Being {
 
   private int LVL, EXP, PTS;
-  private Inventory in;
+  Inventory in;
   private Stats stats, equiptment;
 
   Adventurer(String name, int h, int x, int y) {
@@ -17,15 +17,15 @@ class Adventurer extends Being {
   }
 
   int getSTR() {
-    return stats.getSTR();
+    return stats.getSTR() + equiptment.getSTR();
   }
 
   int getDEX() {
-    return stats.getDEX();
+    return stats.getDEX() + equiptment.getDEX();
   }
 
   int getINT() {
-    return stats.getINT();
+    return stats.getINT() + equiptment.getINT();
   }
 
   int getEXP() {
@@ -71,11 +71,11 @@ class Adventurer extends Being {
   }
 
   void updateStats() {
-    in.getHelm().applyBuffs(stats);
-    in.getLegs().applyBuffs(stats);
-    in.getArms().applyBuffs(stats);
-    in.getChest().applyBuffs(stats);
-    in.getWeapon().applyBuffs(stats);
+    in.getHelm().applyBuffs(equiptment);
+    in.getLegs().applyBuffs(equiptment);
+    in.getArms().applyBuffs(equiptment);
+    in.getChest().applyBuffs(equiptment);
+    in.getWeapon().applyBuffs(equiptment);
   }
 
   void drop(int inInd) {

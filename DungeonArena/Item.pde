@@ -1,9 +1,11 @@
 class Item extends MapObject {
 
   protected boolean stored;
+  protected int type;
 
-  Item(String name, int xi, int yi, int size) {
+  Item(String name, int setType, int xi, int yi, int size) {
     super(name, xi, yi, size);
+    type = setType;
     stored = false;
   }
 
@@ -13,6 +15,10 @@ class Item extends MapObject {
 
   void drop() {
     stored = false;
+  }
+
+  int getType() {
+    return type;
   }
 
   void draw() {
