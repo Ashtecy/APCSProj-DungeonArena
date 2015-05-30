@@ -1,5 +1,6 @@
 class Inventory {
 
+  private final int NAKED = 0;
   private final int HELM = 1;
   private final int CHEST = 2;
   private final int ARMS = 3;
@@ -11,7 +12,7 @@ class Inventory {
   protected int cap;
 
   Inventory (int size) {
-    helm = arms = legs = chest = weapon = new Equiptment("Nothing", 1, 0, 0, 0);
+    helm = arms = legs = chest = weapon = new Equiptment("Nothing", 0, 0, 0, 0);
     cap = size;
     items = new ArrayList<Item>();
     equiptment = new Stats();

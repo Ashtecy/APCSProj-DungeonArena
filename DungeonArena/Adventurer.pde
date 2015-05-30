@@ -71,6 +71,9 @@ class Adventurer extends Being {
   }
 
   void updateStats() {
+    equiptment.setSTR(0);
+    equiptment.setINT(0);
+    equiptment.setDEX(0);
     in.getHelm().applyBuffs(equiptment);
     in.getLegs().applyBuffs(equiptment);
     in.getArms().applyBuffs(equiptment);

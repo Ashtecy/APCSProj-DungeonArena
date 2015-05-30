@@ -11,9 +11,6 @@ protected PImage P2;
 protected PImage L;
 protected PImage S;
 
-Adventurer a;
-Equiptment e;
-
 void setup() {
   size(960, 768);
   background(255);
@@ -23,44 +20,32 @@ void setup() {
   P2 = loadImage("play2.png");
   L = loadImage("loading.png");
   S = loadImage("side.png");
-  a = new Adventurer("JOE", 20, 0, 0);
-  e = new Equiptment("AXE", 5, 0, 0, 0);
-  e.setSTR(20);
 }
 
 void draw() {
-  /*
-  if(MODE==0){
-   background(0);
-   arena = new Dungeon(seed,tileSize);
-   imageMode(CENTER);
-   image(Title,480,150,850,120);
-   Button play = new Button(P1,P2,480,350);
-   play.draw();
-   if(mousePressed){
-   if(play.getIsOver()){
-   loadingScreen();
-   MODE=1;
-   }
-   }
-   }
-   else if(MODE==1){
-   arena.draw();
-   sideScreen();
-   
-   }*/
-  System.out.println(a.getSTR());
+  if (MODE==0) {
+    background(0);
+    arena = new Dungeon(seed, tileSize);
+    imageMode(CENTER);
+    image(Title, 480, 150, 850, 120);
+    Button play = new Button(P1, P2, 480, 350);
+    play.draw();
+    if (mousePressed) {
+      if (play.getIsOver()) {
+        loadingScreen();
+        MODE=1;
+      }
+    }
+  } else if (MODE==1) {
+    arena.draw();
+    sideScreen();
+  }
 }
 
 void keyPressed() {
   if (keyCode==8 && MODE==1) {
     seed=System.currentTimeMillis();
     MODE=0;
-  }
-  if (keyCode == 32) {
-    a.pickUp(e);
-    a.in.equipt(0);
-    a.updateStats();
   }
 }
 
