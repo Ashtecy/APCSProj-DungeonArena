@@ -29,13 +29,17 @@ May 23,2015
   Basic Dungeon Generation: Basic 20 by 25 tile dungeon in which approximately one third of the tiles are walls.
   Played around with branching.
   Started work on the menu screen with a play button and implemented a loading screen. 
-  -Raashid
 
 May 24,2015
   "Backspace" will return the user from the game screen to the menu screen.
   Clicking play once again after exiting to the menu screen will generate a new dungeon.
   Began testing random item spawning.
-  -Raashid 
 
 May 27,2015
   Added features for equiptment, items, inventory, stats interactions between each other.
+  
+May 28, 2015
+  Working on Adventuer movement.
+  
+May 29, 2015
+  Adventuerer can now move using the numpad, allowing diagonal movement. Working on camera to center on the adventuerer and avoid loading the entire map.
