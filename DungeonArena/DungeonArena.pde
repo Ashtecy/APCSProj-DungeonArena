@@ -2,8 +2,10 @@
 protected Dungeon arena;
 protected int MODE;
 protected long seed;
+protected Random r =  new Random();
 
 protected int tileSize=64;
+
 
 protected PImage Title;
 protected PImage P1;
@@ -25,7 +27,7 @@ void setup() {
 void draw() {
   if (MODE==0) {
     background(0);
-    arena = new Dungeon(seed, tileSize);
+    arena = new Dungeon(12,15,seed,tileSize);
     imageMode(CENTER);
     image(Title, 480, 150, 850, 120);
     Button play = new Button(P1, P2, 480, 350);
@@ -38,7 +40,7 @@ void draw() {
     }
   } else if (MODE==1) {
     arena.draw();
-    sideScreen();
+    //sideScreen();
   }
 }
 
@@ -47,6 +49,23 @@ void keyPressed() {
     seed=System.currentTimeMillis();
     MODE=0;
   }
+   if(keyCode==97){
+      arena.getGuy().setXY(arena.getGuy().getX()-tileSize,arena.getGuy().getY()+tileSize);  
+    }else if(keyCode==98){
+      arena.getGuy().setY(arena.getGuy().getY()+tileSize);  
+    }else if(keyCode==99){
+      arena.getGuy().setXY(arena.getGuy().getX()+tileSize,arena.getGuy().getY()+tileSize);  
+    }else if(keyCode==100){
+      arena.getGuy().setX(arena.getGuy().getX()-tileSize);  
+    }else if(keyCode==102){
+      arena.getGuy().setX(arena.getGuy().getX()+tileSize);  
+    }else if(keyCode==103){
+      arena.getGuy().setXY(arena.getGuy().getX()-tileSize,arena.getGuy().getY()-tileSize);  
+    }else if(keyCode==104){
+      arena.getGuy().setY(arena.getGuy().getY()-tileSize);  
+    }else if(keyCode==105){
+      arena.getGuy().setXY(arena.getGuy().getX()+tileSize,arena.getGuy().getY()-tileSize);  
+    }
 }
 
 
@@ -64,6 +83,7 @@ void sideScreen() {
     }
   }      
   imageMode(CENTER);
-  image(Title, 768, 100, 250, 100);
+  image(Title,768,100,300,100);
+  
 }
 

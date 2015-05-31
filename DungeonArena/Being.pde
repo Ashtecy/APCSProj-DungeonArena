@@ -3,13 +3,14 @@ abstract class Being extends MapObject {
   private boolean isAlive;
 
   Being() {
-    this("Thing", 10, 10, 10);
+    this("", 10, 10);
   }
 
-  Being(String n, int h, int x, int y) {
-    super(n, x, y, 64);
-    setMaxHP(h);
-    setHP(h);
+  Being(String n, int x, int y) {
+    super(x,y,64);
+    setName(n);
+    setMaxHP(20);
+    setHP(20);
     isAlive = true;
   }
 
@@ -47,6 +48,10 @@ abstract class Being extends MapObject {
 
   void move(int x, int y) {
     setXY(x, y);
+  }
+  
+  void draw(){
+    super.draw();
   }
 
   abstract void attack(Being other);

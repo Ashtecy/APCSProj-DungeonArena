@@ -1,7 +1,7 @@
 class Adventurer extends Being {
 
   private int LVL, EXP, PTS;
-  Inventory in;
+  protected Inventory in;
   private Stats stats, equiptment;
 
   Adventurer(String name, int h, int x, int y) {
@@ -10,11 +10,18 @@ class Adventurer extends Being {
     equiptment = new Stats(0, 0, 0);
   }
 
-  Adventurer(String name, int h, int x, int y, int str, int dex, int in) {
-    super(name, h, x, y);
-    stats = new Stats(str, dex, in);
-    setEXP(0);
+  Adventurer(String name, int x, int y, int str, int dex, int in) {
+    super(name, x, y);
+    setSTR(str);
+    setDEX(dex);
+    setINT(in);
+    W = loadImage("man.png");
   }
+  
+  Adventurer(String name,int x,int y){
+     this(name,x,y,10,10,10);
+  }
+     
 
   int getSTR() {
     return stats.getSTR() + equiptment.getSTR();
@@ -85,8 +92,12 @@ class Adventurer extends Being {
     in.drop(inInd);
   }
 
-  String getStats() {
-    return getName() + " " + getHP() + " HP\n " + " STR: " + getSTR()  + " DEX: " + getDEX() + " INT: " + getINT();
+  void stamp() {
+    ellipse(getX(), getY(), 20, 20);
+  }  
+  
+  void draw(){
+    super.draw();
   }
 }
 

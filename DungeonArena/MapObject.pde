@@ -1,29 +1,35 @@
 class MapObject {
 
-  private int xpos, ypos, tileRadius;
+
+  protected int rows=12,cols=15;
+  protected int x,y,tileSize;
   protected String name;
-  protected PImage W;
+  protected PImage W = loadImage("mace.png");
 
   MapObject(String name, int x, int y, int tileSize) {
     setXY(x, y);
     this.name = name;
-    tileRadius=tileSize/2;
+    this.tileSize=tileSize;
   }
 
   int getX () {
-    return xpos;
+    return x;
   }
 
   int getY () {
-    return ypos;
+    return y;
   }
 
   void setX (int newX) {
-    xpos = newX;
+    if(newX!=0 && newX!=cols*tileSize){
+      x = newX;
+    }
   }
 
   void setY (int newY) {
-    ypos = newY;
+    if(newY!=0 && newY!=rows*tileSize){
+      y = newY;
+    }
   }
 
   void setXY (int newX, int newY) {
@@ -33,8 +39,7 @@ class MapObject {
 
   void draw() {
     imageMode(CENTER);
-    W=loadImage("mace.png");
-    image(W, xpos+tileRadius, ypos+tileRadius, tileRadius, tileRadius);
+    image(W,x+(tileSize/2),y+(tileSize/2),0.75*tileSize,0.75*tileSize);
   }
 
   //abstract void stamp();
