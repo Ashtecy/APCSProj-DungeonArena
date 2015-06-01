@@ -4,17 +4,9 @@ class Adventurer extends Being {
   protected Inventory in;
   private Stats stats, equiptment;
 
-  Adventurer(String name, int h, int x, int y) {
-    this(name, h, x, y, 10, 10, 10);
-    in = new Inventory(20);
-    equiptment = new Stats(0, 0, 0);
-  }
-
   Adventurer(String name, int x, int y, int str, int dex, int in) {
     super(name, x, y);
-    setSTR(str);
-    setDEX(dex);
-    setINT(in);
+    stats = new Stats(str, dex, in);
     W = loadImage("man.png");
   }
   

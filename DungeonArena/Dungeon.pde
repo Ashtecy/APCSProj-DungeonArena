@@ -28,11 +28,11 @@ class Dungeon{
         guy = new Adventurer("Guy",x,y);
       }
     }
-    camera = new Tile[5][5];
-    int cX=guy.getX()-2;
-    int cY=guy.getY()-2;
-    for(int i=cX;i<=cX+4;i++){
-      for(int j=cY;j<=cY+4;j++){
+    camera = new Tile[7][7];
+    int cX=guy.getX()-3;
+    int cY=guy.getY()-3;
+    for(int i=cX;i<=cX+6;i++){
+      for(int j=cY;j<=cY+6;j++){
         camera[j-cY][i-cX]=map[j][i];
         camera[j-cY][i-cX].setXY((j-cY)*tileSize,(i-cX)*tileSize);
       }
