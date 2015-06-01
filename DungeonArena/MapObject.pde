@@ -37,6 +37,5 @@ class MapObject {
     image(W, xpos+tileRadius, ypos+tileRadius, tileRadius, tileRadius);
   }
 
-  //abstract void stamp();
 }
 

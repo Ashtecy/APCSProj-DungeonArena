@@ -39,7 +39,11 @@ May 27,2015
   Added features for equiptment, items, inventory, stats interactions between each other.
   
 May 28, 2015
-  Working on Adventuer movement.
+  Working on Adventurer movement.
   
 May 29, 2015
   Adventuerer can now move using the numpad, allowing diagonal movement. Working on camera to center on the adventuerer and avoid loading the entire map.
+  Equiptments affect the Adventurer stats. Equipting weapons seems to work properly, but have not tested it visually with the dungeon (i.e. picking weapons off the floor).
+
+May 31, 2015
+  Working on interaction between items, beings, and tiles of the dungeon.

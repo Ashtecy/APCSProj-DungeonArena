@@ -60,8 +60,17 @@ class Adventurer extends Being {
     PTS = p;
   }
 
+  void levelUp() {
+    LVL++;
+    EXP = 0;
+    PTS = 3;
+  }
+
   void attack(Being other) {
     other.setHP(other.getHP() - getSTR());
+    if (other.getHP() <= 0) {
+      other.die();
+    }
   }
 
   void pickUp(Item it) {

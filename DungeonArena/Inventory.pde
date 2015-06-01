@@ -1,18 +1,19 @@
 class Inventory {
 
-  private final int NAKED = 0;
+  private final int CONSUMABLE = 0;
   private final int HELM = 1;
   private final int CHEST = 2;
   private final int ARMS = 3;
   private final int LEGS = 4;
   private final int WEAPON = 5;
+  private final int NAKED = 6;
   protected Equiptment helm, arms, legs, chest, weapon;
   protected Stats equiptment;
   protected ArrayList<Item> items;
   protected int cap;
 
   Inventory (int size) {
-    helm = arms = legs = chest = weapon = new Equiptment("Nothing", 0, 0, 0, 0);
+    helm = arms = legs = chest = weapon = new Equiptment("Nothing", NAKED, 6, 0, 0);
     cap = size;
     items = new ArrayList<Item>();
     equiptment = new Stats();
