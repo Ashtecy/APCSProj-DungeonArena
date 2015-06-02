@@ -4,8 +4,9 @@ class Adventurer extends Being {
   Inventory in;
   private Stats stats, equiptment;
 
-  Adventurer(String name, int h, int x, int y) {
-    this(name, h, x, y, 10, 10, 10);
+  Adventurer(String name, int level, int x, int y) {
+    this(name, 20 + level * 4, x, y, 10, 10, 10);
+    setLVL(level);
     in = new Inventory(20);
     equiptment = new Stats(0, 0, 0);
   }
@@ -13,6 +14,7 @@ class Adventurer extends Being {
   Adventurer(String name, int h, int x, int y, int str, int dex, int in) {
     super(name, h, x, y);
     stats = new Stats(str, dex, in);
+    setLVL(1);
     setEXP(0);
   }
 

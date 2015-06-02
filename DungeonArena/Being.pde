@@ -1,5 +1,6 @@
 abstract class Being extends MapObject {
 
+  private Dungeon dun;
   private int maxHP, HP;
   private boolean isAlive;
   private int range, sight;
@@ -13,6 +14,8 @@ abstract class Being extends MapObject {
     setMaxHP(h);
     setHP(h);
     isAlive = true;
+    range = 1;
+    sight = 5;
   }
 
   String getName() {
@@ -51,18 +54,43 @@ abstract class Being extends MapObject {
     setXY(x, y);
   }
 
-  abstract void attack(Being other);
+  void attack(Being other) {
+    other.setHP((int)(other.getHP() - 1  - Math.random() * 5));
+  }
 
   void act(Dungeon d) {
-  /*  if (adventurer is in range) {
-    } else if (adventuer is in sight) {
-      //move towards adventurer
-    }*/
+    Adventurer a = d.getAdventurer();
+    if (isInRange(a, sight)) {
+      if (isInRange(a, range)) {
+        attack(a);
+      } else {
+        if (a.getX() > getX()) {
+          move(getX() + 1, getY());
+        } else if (a.getX() < getX()) {
+          move(getX() - 1, getY());
+        }
+        if (a.getY() > getY()) {
+          move(getX(), getY() + 1);
+        } else {
+          move(getX(), getY() - 1);
+        }
+      }
+    } else {
+      move(getX(), getY());
+    }
+  }
+
+  boolean isInRange (Being b, int rad) {
+    if (b.getX() - getX() <= rad && b.getY() - getY() <= rad) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   void die() {
     //drop an item
-  }
+      }
 
   void drop(Dungeon d, Item drop) {
     getTile(d, getX(), getY()).addDrop(drop);

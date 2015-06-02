@@ -2,6 +2,7 @@
 class Dungeon {
   protected Tile[][] map;
   protected int tileSize;
+  protected Adventurer adv;
 
   Dungeon(long seed, int tileSize) {
     this.tileSize = tileSize;
@@ -16,10 +17,19 @@ class Dungeon {
         }
       }
     }
+    adv = null;
   }
 
- Tile getTile(int xpos, int ypos) {
+  Tile getTile(int xpos, int ypos) {
     return map[xpos / tileSize][ypos / tileSize];
+  }
+
+  void addAdventurer(Adventurer a) {
+    adv = a;
+  }
+
+  Adventurer getAdventurer() {
+    return adv;
   }
 
   void draw() {
