@@ -8,6 +8,7 @@ class MapObject {
     setXY(x, y);
     this.name = name;
     tileRadius=tileSize/2;
+    W=loadImage("mace.png");
   }
 
   int getX () {
@@ -31,11 +32,14 @@ class MapObject {
     setY(newY);
   }
 
-  void draw() {
-    imageMode(CENTER);
-    W=loadImage("mace.png");
-    image(W, xpos+tileRadius, ypos+tileRadius, tileRadius, tileRadius);
+  PImage getImage() {
+    return W;
   }
 
+  void draw() {
+    imageMode(CENTER);
+    //    W=loadImage("mace.png");
+    image(W, xpos+tileRadius, ypos+tileRadius, tileRadius, tileRadius);
+  }
 }
 

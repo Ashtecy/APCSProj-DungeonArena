@@ -62,6 +62,13 @@ void sideScreen() {
       image(S, j, i, 128, 128);
     }
   }      
+ // if (arena.getAdventurer() != null) {
+    Inventory in = new Inventory(20);//arena.getAdventurer().in;
+    in.add(new Consumable(20, 20, 64));
+    for (int i = 0; i < in.size (); i++) {
+      image(in.use(i).getImage(), 580 + (i % 4) * 50, height / 4 + (i / 5) * 50); 
+    }
+ // }
   imageMode(CENTER);
   image(Title, 768, 100, 250, 100);
 }

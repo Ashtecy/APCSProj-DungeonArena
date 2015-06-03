@@ -8,6 +8,7 @@ class Adventurer extends Being {
     this(name, 20 + level * 4, x, y, 10, 10, 10);
     setLVL(level);
     in = new Inventory(20);
+    in.add(new Consumable(1, 1, 64));
     equiptment = new Stats(0, 0, 0);
   }
 
@@ -69,15 +70,23 @@ class Adventurer extends Being {
   }
 
   void attack(Being other) {
-    other.setHP(other.getHP() - getSTR());
-    if (other.getHP() <= 0) {
-      other.die();
+    if (isInRange(other, 1)) {
+      other.setHP(other.getHP() - getSTR());
+      if (other.getHP() <= 0) {
+        other.die();
+      }
     }
   }
 
   void pickUp(Item it) {
     if (in.add(it)) {
       it.pickUp();
+    }
+  }
+  
+  void useConsumable(int ind) {
+    if (in.use(ind) != null){
+     in.use(ind).use(this); 
     }
   }
 
