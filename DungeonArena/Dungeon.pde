@@ -62,7 +62,6 @@ class Dungeon{
       }
     }
     guy.draw();
-
   }
   
   Adventurer getGuy(){
