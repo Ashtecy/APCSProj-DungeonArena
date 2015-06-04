@@ -64,10 +64,6 @@ class Dungeon{
     guy.draw();
   }
   
-  Tile getTile(int xpos, int ypos) {
-    return map[xpos / tileSize][ypos / tileSize];
-  }
-  
   Adventurer getGuy(){
     return guy;
   }
