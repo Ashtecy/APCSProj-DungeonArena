@@ -1,4 +1,3 @@
-
 class Dungeon{
   
   protected Tile[][] camera = new Tile[7][7];
@@ -65,10 +64,6 @@ class Dungeon{
     guy.draw();
   }
   
-  Tile getTile(int xpos, int ypos) {
-    return map[xpos / tileSize][ypos / tileSize];
-  }
-  
   Adventurer getGuy(){
     return guy;
   }
@@ -77,6 +72,9 @@ class Dungeon{
     return map;
   }
   
+  Tile getTile(int x, int y) {
+    return map[x / tileSize][y / tileSize];
+  }
   
 }
 

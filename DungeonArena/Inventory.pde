@@ -13,7 +13,7 @@ class Inventory {
   protected int cap;
 
   Inventory (int size) {
-    helm = arms = legs = chest = weapon = new Equiptment("Nothing", 0, 0, 0);
+    helm = arms = legs = chest = weapon = new Equiptment("Nothing", NAKED, 6, 0);
     cap = size;
     items = new ArrayList<Item>();
     equiptment = new Stats();

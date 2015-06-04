@@ -12,7 +12,7 @@ class Tile {
     this.tileSize=tileSize;
     isWall=(n==0);
   }
-  
+
   void setX (int newX) {
       x = newX;
   }
