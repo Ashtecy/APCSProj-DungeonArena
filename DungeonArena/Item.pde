@@ -3,8 +3,8 @@ class Item extends MapObject {
   protected boolean stored;
   protected int type;
 
-  Item(String name, int setType, int xi, int yi, int size) {
-    super(name, xi, yi, size);
+  Item(String name, int setType, int xi, int yi) {
+    super(name, xi, yi);
     type = setType;
     stored = false;
   }

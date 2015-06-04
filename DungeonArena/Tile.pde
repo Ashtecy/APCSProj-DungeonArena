@@ -4,24 +4,12 @@ class Tile{
   
   protected boolean isWall;
   protected int x,y;
-  protected Random r;
+  protected Random r = new Random();
   protected int tileSize;
-  
-  protected ArrayList<Item> drops;
   
   Tile(int n,int tileSize){
     this.tileSize=tileSize;
-    if(n!=0){
-      isWall=false;
-      r = new Random();
-      drops=new ArrayList<Item>();
-      if(r.nextInt(15)==0){
-        Item drop = new Item("Axe of the Test Cases",5,x,y,tileSize);
-        drops.add(drop);
-      }
-    }else{
-      isWall=true;
-    }
+    isWall=(n==0);
   }
   
   void setX (int newX) {
@@ -45,13 +33,10 @@ class Tile{
     imageMode(CORNER);
     if(isWall){
       PImage wall=loadImage("wall.png");
-      image(wall,x,y,tileSize,tileSize);
+      image(wall,x*tileSize,y*tileSize,tileSize,tileSize);
     }else{
       PImage floor=loadImage("floor.png");
-      image(floor,x,y,tileSize,tileSize);
-      for(Item o:drops){
-        o.draw();
-      }
+      image(floor,x*tileSize,y*tileSize,tileSize,tileSize);
     } 
   }
 }

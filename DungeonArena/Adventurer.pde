@@ -13,7 +13,11 @@ class Adventurer extends Being {
   Adventurer(String name,int x,int y){
      this(name,x,y,10,10,10);
   }
-     
+
+  void draw(){
+    imageMode(CENTER);
+    image(W,tileSize*(3.5),tileSize*(3.5),0.8*tileSize,0.8*tileSize);
+  }
 
   int getSTR() {
     return stats.getSTR() + equiptment.getSTR();
@@ -59,8 +63,17 @@ class Adventurer extends Being {
     PTS = p;
   }
 
+  void levelUp() {
+    LVL++;
+    EXP = 0;
+    PTS = 3;
+  }
+
   void attack(Being other) {
     other.setHP(other.getHP() - getSTR());
+    if (other.getHP() <= 0) {
+      other.die();
+    }
   }
 
   void pickUp(Item it) {
@@ -88,8 +101,5 @@ class Adventurer extends Being {
     ellipse(getX(), getY(), 20, 20);
   }  
   
-  void draw(){
-    super.draw();
-  }
 }
 

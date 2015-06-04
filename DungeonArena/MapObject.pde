@@ -2,14 +2,13 @@ class MapObject {
 
 
   protected int rows=12,cols=15;
-  protected int x,y,tileSize;
+  protected int x,y,tileSize=80;
   protected String name;
   protected PImage W = loadImage("mace.png");
 
-  MapObject(String name, int x, int y, int tileSize) {
+  MapObject(String name, int x, int y) {
     setXY(x, y);
     this.name = name;
-    this.tileSize=tileSize;
   }
 
   int getX () {
@@ -39,7 +38,7 @@ class MapObject {
 
   void draw() {
     imageMode(CENTER);
-    image(W,x+(tileSize/2),y+(tileSize/2),0.75*tileSize,0.75*tileSize);
+    image(W,tileSize*x+tileSize/2,tileSize*y+tileSize/2,0.75*tileSize,0.75*tileSize);
   }
 
   //abstract void stamp();

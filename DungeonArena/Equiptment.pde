@@ -2,8 +2,8 @@ class Equiptment extends Item {
 
   protected Stats stats;
 
-  Equiptment(String name, int setType, int xi, int yi, int size) {
-    super("Equiptment", setType, xi, yi, size);
+  Equiptment(String name, int setType, int xi, int yi) {
+    super("Equiptment", setType, xi, yi);
     stats = new Stats();
   }
 

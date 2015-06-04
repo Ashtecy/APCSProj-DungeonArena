@@ -4,7 +4,7 @@ protected int MODE;
 protected long seed;
 protected Random r =  new Random();
 
-protected int tileSize=64;
+protected int tileSize=80;
 
 
 protected PImage Title;
@@ -14,7 +14,7 @@ protected PImage L;
 protected PImage S;
 
 void setup() {
-  size(960, 768);
+  size(960, 800);
   background(255);
   MODE=0;
   Title = loadImage("Title.png");
@@ -40,7 +40,7 @@ void draw() {
     }
   } else if (MODE==1) {
     arena.draw();
-    //sideScreen();
+    sideScreen();
   }
 }
 
@@ -50,22 +50,22 @@ void keyPressed() {
     MODE=0;
   }
    if(keyCode==97){
-      arena.getGuy().setXY(arena.getGuy().getX()-tileSize,arena.getGuy().getY()+tileSize);  
-    }else if(keyCode==98){
-      arena.getGuy().setY(arena.getGuy().getY()+tileSize);  
-    }else if(keyCode==99){
-      arena.getGuy().setXY(arena.getGuy().getX()+tileSize,arena.getGuy().getY()+tileSize);  
-    }else if(keyCode==100){
-      arena.getGuy().setX(arena.getGuy().getX()-tileSize);  
-    }else if(keyCode==102){
-      arena.getGuy().setX(arena.getGuy().getX()+tileSize);  
-    }else if(keyCode==103){
-      arena.getGuy().setXY(arena.getGuy().getX()-tileSize,arena.getGuy().getY()-tileSize);  
-    }else if(keyCode==104){
-      arena.getGuy().setY(arena.getGuy().getY()-tileSize);  
-    }else if(keyCode==105){
-      arena.getGuy().setXY(arena.getGuy().getX()+tileSize,arena.getGuy().getY()-tileSize);  
-    }
+     arena.getGuy().setXY(arena.getGuy().getX()-1,arena.getGuy().getY()+1); 
+   }else if(keyCode==98){
+     arena.getGuy().setY(arena.getGuy().getY()+1);  
+   }else if(keyCode==99){
+     arena.getGuy().setXY(arena.getGuy().getX()+1,arena.getGuy().getY()+1);  
+   }else if(keyCode==100){
+     arena.getGuy().setX(arena.getGuy().getX()-1);  
+   }else if(keyCode==102){
+     arena.getGuy().setX(arena.getGuy().getX()+1);  
+   }else if(keyCode==103){
+     arena.getGuy().setXY(arena.getGuy().getX()-1,arena.getGuy().getY()-1);  
+   }else if(keyCode==104){
+     arena.getGuy().setY(arena.getGuy().getY()-1);  
+   }else if(keyCode==105){
+     arena.getGuy().setXY(arena.getGuy().getX()+1,arena.getGuy().getY()-1);  
+   }
 }
 
 
@@ -76,14 +76,14 @@ void loadingScreen() {
 }
 
 void sideScreen() {
-  for (int i=0; i<768; i+=128) {
-    for (int j=576; j<960; j+=128) {
+  for (int i=0; i<800; i+=128) {
+    for (int j=560; j<960; j+=128) {
       imageMode(CORNER);
       image(S, j, i, 128, 128);
     }
   }      
   imageMode(CENTER);
-  image(Title,768,100,300,100);
+  image(Title,760,100,250,80);
   
 }
 
