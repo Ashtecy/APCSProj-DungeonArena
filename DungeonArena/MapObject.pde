@@ -41,6 +41,5 @@ class MapObject {
     image(W,tileSize*x+tileSize/2,tileSize*y+tileSize/2,0.75*tileSize,0.75*tileSize);
   }
 
-  //abstract void stamp();
 }
 

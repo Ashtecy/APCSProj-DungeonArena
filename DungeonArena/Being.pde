@@ -1,6 +1,8 @@
 abstract class Being extends MapObject {
+
   private int maxHP, HP;
   private boolean isAlive;
+  private int range, sight;
 
   Being() {
     this("", 10, 10);
@@ -55,12 +57,23 @@ abstract class Being extends MapObject {
 
   abstract void attack(Being other);
 
+  void act(Dungeon d) {
+  /*  if (adventurer is in range) {
+    } else if (adventuer is in sight) {
+      //move towards adventurer
+    }*/
+  }
+
   void die() {
     //drop an item
   }
 
-  void drop(MapObject loot) {
-    //spawn new item
+  void drop(Dungeon d, Item drop) {
+    getTile(d, getX(), getY()).addDrop(drop);
+  }
+
+  Tile getTile(Dungeon d, int x, int y) {
+    return d.getTile(x, y);
   }
 }     
 

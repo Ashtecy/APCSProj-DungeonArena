@@ -68,7 +68,6 @@ void keyPressed() {
    }
 }
 
-
 void loadingScreen() {
   background(0);
   imageMode(CORNER);

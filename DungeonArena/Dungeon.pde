@@ -1,4 +1,3 @@
-import java.util.*;
 
 class Dungeon{
   
@@ -61,9 +60,13 @@ class Dungeon{
     for(Tile[] e:camera){
       for(Tile f:e){
         f.draw();
-      } 
+      }
     }
     guy.draw();
+  }
+  
+  Tile getTile(int xpos, int ypos) {
+    return map[xpos / tileSize][ypos / tileSize];
   }
   
   Adventurer getGuy(){
@@ -76,3 +79,4 @@ class Dungeon{
   
   
 }
+
