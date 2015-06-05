@@ -38,6 +38,7 @@ class Dungeon {
         f.draw();
       }
     }
+    getAdventurer().draw();
   }
 }
 

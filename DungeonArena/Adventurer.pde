@@ -8,8 +8,8 @@ class Adventurer extends Being {
     this(name, 20 + level * 4, x, y, 10, 10, 10);
     setLVL(level);
     in = new Inventory(20);
-    in.add(new Consumable(1, 1, 64));
     equiptment = new Stats(0, 0, 0);
+    setImage("yoshi.png");
   }
 
   Adventurer(String name, int h, int x, int y, int str, int dex, int in) {
