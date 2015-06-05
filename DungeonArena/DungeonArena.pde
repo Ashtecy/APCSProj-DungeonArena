@@ -1,4 +1,4 @@
-
+import java.util.Random;
 protected Dungeon arena;
 protected int MODE;
 protected long seed;
@@ -83,7 +83,7 @@ void sideScreen() {
   if (arena.getGuy() != null) {
     Inventory in = arena.getGuy().in;
     for (int i = 0; i < in.size (); i++) {
-      image(in.use(i).getImage(), 580 + (i % 4) * 50, height / 4 + (i / 5) * 50);
+      image(in.use(i).getImage(), 560 + (i % 4) * 50, height / 4 + (i / 5) * 50);
     }
   }
   imageMode(CENTER);

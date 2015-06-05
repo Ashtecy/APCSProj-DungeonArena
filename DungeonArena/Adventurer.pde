@@ -1,21 +1,24 @@
 class Adventurer extends Being {
 
   private int LVL, EXP, PTS;
-  protected Inventory in;
+  protected Inventory in = new Inventory(20);
   private Stats stats, equiptment;
 
   Adventurer(String name, int x, int y, int str, int dex, int in) {
     super(name, x, y);
     stats = new Stats(str, dex, in);
     equiptment = new Stats(0, 0, 0);
+    //   in = new Inventory(20);
+    //   in.add(new Item("BLAH", 0, 5, 5));
     setLVL(1);
     setEXP(0);
     setImage("man.png");
   }
 
   Adventurer(String name, int x, int y) {
+
     this(name, x, y, 10, 10, 10);
-    in = new Inventory(20);
+    in.add(new Item("BLAH", 0, 5, 5));
   }
 
   void draw() {
