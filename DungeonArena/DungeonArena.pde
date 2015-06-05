@@ -41,6 +41,7 @@ void draw() {
   } else if (MODE==1) {
     arena.draw();
     sideScreen();
+    textBox();
   }
 }
 
@@ -87,18 +88,25 @@ void keyPressed() {
 void loadingScreen() {
   background(0);
   imageMode(CORNER);
-  image(L, 625, 690, 300, 60);
+  image(L, 625, 720, 300, 60);
 }
 
 void sideScreen() {
+  imageMode(CORNER);
   for (int i=0; i<800; i+=128) {
     for (int j=560; j<960; j+=128) {
-      imageMode(CORNER);
       image(S, j, i, 128, 128);
     }
   }      
   imageMode(CENTER);
   image(Title,760,100,250,80);
-  
 }
 
+void textBox(){
+  imageMode(CORNER);
+  for (int i=560; i<800; i+=128) {
+    for (int j=0; j<560; j+=128) {
+      image(S, j, i, 128, 128);
+    }
+  }
+}  
