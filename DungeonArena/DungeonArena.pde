@@ -74,17 +74,15 @@ void loadingScreen() {
 }
 
 void sideScreen() {
+  System.out.println("A");
   for (int i=0; i<800; i+=128) {
     for (int j=560; j<960; j+=128) {
       imageMode(CORNER);
       image(S, j, i, 128, 128);
     }
   }      
-  if (arena.getGuy() != null) {
-    Inventory in = arena.getGuy().in;
-    for (int i = 0; i < in.size (); i++) {
-      image(in.use(i).getImage(), 560 + (i % 4) * 50, height / 4 + (i / 5) * 50);
-    }
+  for (int i = 0; i < arena.getGuy().inv.size(); i++) {
+    image(arena.getGuy().inv.use(i).getImage(), 560 + (i % 4) * 50, height / 4 + (i / 5) * 50);
   }
   imageMode(CENTER);
   image(Title, 760, 100, 250, 80);

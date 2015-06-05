@@ -22,6 +22,7 @@ class Inventory {
   boolean add (Item i) {
     if (cap > items.size()) {
       items.add(i);
+      System.out.println(items.size());
       return true;
     }    
     return false;
@@ -58,7 +59,7 @@ class Inventory {
 
   Consumable use(int ind) {
     if (items.get(ind).getType() == CONSUMABLE) {
-      return (Consumable)items.remove(ind);
+      return (Consumable)(items.remove(ind));
     }
     return null;
   }

@@ -1,24 +1,22 @@
 class Adventurer extends Being {
 
   private int LVL, EXP, PTS;
-  protected Inventory in = new Inventory(20);
+  protected Inventory inv;// = new Inventory(20);
   private Stats stats, equiptment;
 
   Adventurer(String name, int x, int y, int str, int dex, int in) {
     super(name, x, y);
     stats = new Stats(str, dex, in);
     equiptment = new Stats(0, 0, 0);
-    //   in = new Inventory(20);
-    //   in.add(new Item("BLAH", 0, 5, 5));
+    inv = new Inventory(20);
     setLVL(1);
     setEXP(0);
     setImage("man.png");
+    System.out.println("AAA");
   }
 
   Adventurer(String name, int x, int y) {
-
     this(name, x, y, 10, 10, 10);
-//    in.add(new Item("BLAH", 0, 5, 5));
   }
 
   void draw() {
@@ -86,14 +84,14 @@ class Adventurer extends Being {
   }
 
   void pickUp(Item it) {
-    if (in.add(it)) {
+    if (inv.add(it)) {
       it.pickUp();
     }
   }
 
   void useConsumable(int ind) {
-    if (in.use(ind) != null) {
-      in.use(ind).use(this);
+    if (inv.use(ind) != null) {
+      inv.use(ind).use(this);
     }
   }
 
@@ -101,15 +99,15 @@ class Adventurer extends Being {
     equiptment.setSTR(0);
     equiptment.setINT(0);
     equiptment.setDEX(0);
-    in.getHelm().applyBuffs(equiptment);
-    in.getLegs().applyBuffs(equiptment);
-    in.getArms().applyBuffs(equiptment);
-    in.getChest().applyBuffs(equiptment);
-    in.getWeapon().applyBuffs(equiptment);
+    inv.getHelm().applyBuffs(equiptment);
+    inv.getLegs().applyBuffs(equiptment);
+    inv.getArms().applyBuffs(equiptment);
+    inv.getChest().applyBuffs(equiptment);
+    inv.getWeapon().applyBuffs(equiptment);
   }
 
   void drop(int inInd) {
-    in.drop(inInd);
+    inv.drop(inInd);
   }
 
   void stamp() {

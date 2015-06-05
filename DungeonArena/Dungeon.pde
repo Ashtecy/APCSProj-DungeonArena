@@ -31,7 +31,7 @@ class Dungeon {
   }
 
   void spawnGuy() {
-    while (guy==null) {
+    if (guy==null) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall()) {
@@ -41,6 +41,7 @@ class Dungeon {
   }
 
   void setupCamera() {
+    Adventurer a = new Adventurer("A", 2, 2);
     int cX = guy.getX()-3;
     int cY = guy.getY()-3;
     for (int i=cX; i<cX+7; i++) {

@@ -10,6 +10,9 @@ class Tile {
   Tile(int n, int tileSize) {
     this.tileSize=tileSize;
     isWall=(n==0);
+    if (Math.random() < .1){
+     drops.add(new Consumable(x, y)); 
+    }
     if (isWall()) {
       setImage("wall.png");
     } else {
