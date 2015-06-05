@@ -7,16 +7,20 @@ class Adventurer extends Being {
   Adventurer(String name, int x, int y, int str, int dex, int in) {
     super(name, x, y);
     stats = new Stats(str, dex, in);
-    W = loadImage("man.png");
-  }
-  
-  Adventurer(String name,int x,int y){
-     this(name,x,y,10,10,10);
+    equiptment = new Stats(0, 0, 0);
+    setLVL(1);
+    setEXP(0);
+    setImage("man.png");
   }
 
-  void draw(){
+  Adventurer(String name, int x, int y) {
+    this(name, x, y, 10, 10, 10);
+    in = new Inventory(20);
+  }
+
+  void draw() {
     imageMode(CENTER);
-    image(W,tileSize*(3.5),tileSize*(3.5),0.8*tileSize,0.8*tileSize);
+    image(W, tileSize*(3.5), tileSize*(3.5), 0.8*tileSize, 0.8*tileSize);
   }
 
   int getSTR() {
@@ -70,15 +74,23 @@ class Adventurer extends Being {
   }
 
   void attack(Being other) {
-    other.setHP(other.getHP() - getSTR());
-    if (other.getHP() <= 0) {
-      other.die();
+    if (isInRange(other, 1)) {
+      other.setHP(other.getHP() - getSTR());
+      if (other.getHP() <= 0) {
+        other.die();
+      }
     }
   }
 
   void pickUp(Item it) {
     if (in.add(it)) {
       it.pickUp();
+    }
+  }
+
+  void useConsumable(int ind) {
+    if (in.use(ind) != null) {
+      in.use(ind).use(this);
     }
   }
 
@@ -99,7 +111,6 @@ class Adventurer extends Being {
 
   void stamp() {
     ellipse(getX(), getY(), 20, 20);
-  }  
-  
+  }
 }
 

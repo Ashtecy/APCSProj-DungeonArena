@@ -33,7 +33,7 @@ class Inventory {
 
   void equipt (int ind) {
     if (items.get(ind) != null && ind < cap) {
-      int temp = ((Equiptment)items.get(ind)).getType();
+      int temp = items.get(ind).getType();
       switch (temp) {
       case HELM:
         helm = (Equiptment)items.get(ind);
@@ -54,6 +54,17 @@ class Inventory {
         break;
       }
     }
+  }
+
+  Consumable use(int ind) {
+    if (items.get(ind).getType() == CONSUMABLE) {
+      return (Consumable)items.remove(ind);
+    }
+    return null;
+  }
+
+  int size() {
+    return items.size();
   }
 
   Equiptment getHelm() {
