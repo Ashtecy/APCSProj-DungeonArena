@@ -18,7 +18,7 @@ class Adventurer extends Being {
   Adventurer(String name, int x, int y) {
 
     this(name, x, y, 10, 10, 10);
-    in.add(new Item("BLAH", 0, 5, 5));
+//    in.add(new Item("BLAH", 0, 5, 5));
   }
 
   void draw() {
