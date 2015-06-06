@@ -20,11 +20,5 @@ class Item extends MapObject {
   int getType() {
     return type;
   }
-
-  void draw() {
-    if (!stored) {
-      super.draw();
-    }
-  }
 }
 

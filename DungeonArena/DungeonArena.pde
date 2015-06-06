@@ -48,39 +48,47 @@ void keyPressed() {
     seed=System.currentTimeMillis();
     MODE=0;
   }
-   if(keyCode==97){
-     if(!arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()+1].isWall()){
-       arena.getGuy().setXY(arena.getGuy().getX()-1,arena.getGuy().getY()+1); 
-     }
-   }else if(keyCode==98){
-     if(arena.getMap()[arena.getGuy().getX()][arena.getGuy().getY()+1].isWall()==false){
-       arena.getGuy().setY(arena.getGuy().getY()+1);  
-     }
-   }else if(keyCode==99){
-     if(arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()+1].isWall()==false){
-       arena.getGuy().setXY(arena.getGuy().getX()+1,arena.getGuy().getY()+1);  
-     }
-   }else if(keyCode==100){
-     if(arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()].isWall()==false){
-       arena.getGuy().setX(arena.getGuy().getX()-1);  
-     }  
-   }else if(keyCode==102){
-     if(arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()].isWall()==false){
-       arena.getGuy().setX(arena.getGuy().getX()+1);  
-     }
-   }else if(keyCode==103){
-     if(arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()-1].isWall()==false){
-       arena.getGuy().setXY(arena.getGuy().getX()-1,arena.getGuy().getY()-1);  
-     }
-   }else if(keyCode==104){
-     if(arena.getMap()[arena.getGuy().getX()][arena.getGuy().getY()-1].isWall()==false){
-       arena.getGuy().setY(arena.getGuy().getY()-1);  
-     }  
-   }else if(keyCode==105){
-     if(arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()-1].isWall()==false){
-       arena.getGuy().setXY(arena.getGuy().getX()+1,arena.getGuy().getY()-1);  
-     }
-   }
+  if (keyCode==32) {
+    int x = arena.getGuy().getX();
+    int y = arena.getGuy().getY();
+    Item topDrop = arena.getTile(x, y).removeDrop();
+    if (topDrop != null) {
+      arena.getGuy().pickUp(topDrop);
+    }
+  }
+  if (keyCode==97) {
+    if (!arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()+1].isWall()) {
+      arena.getGuy().setXY(arena.getGuy().getX()-1, arena.getGuy().getY()+1);
+    }
+  } else if (keyCode==98) {
+    if (arena.getMap()[arena.getGuy().getX()][arena.getGuy().getY()+1].isWall()==false) {
+      arena.getGuy().setY(arena.getGuy().getY()+1);
+    }
+  } else if (keyCode==99) {
+    if (arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()+1].isWall()==false) {
+      arena.getGuy().setXY(arena.getGuy().getX()+1, arena.getGuy().getY()+1);
+    }
+  } else if (keyCode==100) {
+    if (arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()].isWall()==false) {
+      arena.getGuy().setX(arena.getGuy().getX()-1);
+    }
+  } else if (keyCode==102) {
+    if (arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()].isWall()==false) {
+      arena.getGuy().setX(arena.getGuy().getX()+1);
+    }
+  } else if (keyCode==103) {
+    if (arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()-1].isWall()==false) {
+      arena.getGuy().setXY(arena.getGuy().getX()-1, arena.getGuy().getY()-1);
+    }
+  } else if (keyCode==104) {
+    if (arena.getMap()[arena.getGuy().getX()][arena.getGuy().getY()-1].isWall()==false) {
+      arena.getGuy().setY(arena.getGuy().getY()-1);
+    }
+  } else if (keyCode==105) {
+    if (arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()-1].isWall()==false) {
+      arena.getGuy().setXY(arena.getGuy().getX()+1, arena.getGuy().getY()-1);
+    }
+  }
 }
 
 void loadingScreen() {
@@ -90,15 +98,14 @@ void loadingScreen() {
 }
 
 void sideScreen() {
-  System.out.println("A");
   for (int i=0; i<800; i+=128) {
     for (int j=560; j<960; j+=128) {
       imageMode(CORNER);
       image(S, j, i, 128, 128);
     }
-  }      
-  for (int i = 0; i < arena.getGuy().inv.size(); i++) {
-    image(arena.getGuy().inv.use(i).getImage(), 560 + (i % 4) * 50, height / 4 + (i / 5) * 50);
+  }    
+  for (int i = 0; i < arena.getGuy ().inv.size(); i++) {
+    image(arena.getGuy().inv.use(i).getImage(), 560 + (i % 4) * 100, height / 4 + (i / 4) * 100, 100, 100);
   }
   imageMode(CENTER);
   image(Title, 760, 100, 250, 80);

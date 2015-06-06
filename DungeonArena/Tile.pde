@@ -10,9 +10,7 @@ class Tile {
   Tile(int n, int tileSize) {
     this.tileSize=tileSize;
     isWall=(n==0);
-    if (Math.random() < .1){
-     drops.add(new Consumable(x, y)); 
-    }
+    addDrop(new Consumable(x,y));
     if (isWall()) {
       setImage("wall.png");
     } else {
@@ -49,18 +47,17 @@ class Tile {
     drops.add(i);
   }
 
-  void removeDrop() {
+  Item removeDrop() {
     if (drops.size() > 0) {
-      drops.remove(drops.size() - 1);
+      return drops.remove(drops.size() - 1);
     }
+    return null;
   }
 
   void draw() {
     imageMode(CORNER);
-    if (isWall) {
-      image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
-    } else {
-      image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
+    image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
+    if (!isWall()) {
       for (Item o : drops) {
         o.draw();
       }

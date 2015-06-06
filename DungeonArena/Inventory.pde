@@ -19,17 +19,15 @@ class Inventory {
     equiptment = new Stats();
   }
 
-  boolean add (Item i) {
-    if (cap > items.size()) {
+  void add (Item i) {
+    if (items.size() < cap) {
       items.add(i);
-      System.out.println(items.size());
-      return true;
-    }    
-    return false;
+    }
   }
 
   void drop (int inInd) {
     items.remove(inInd).drop();
+    System.out.println("A");
   }
 
   void equipt (int ind) {
@@ -59,7 +57,7 @@ class Inventory {
 
   Consumable use(int ind) {
     if (items.get(ind).getType() == CONSUMABLE) {
-      return (Consumable)(items.remove(ind));
+      return (Consumable)(items.get(ind));
     }
     return null;
   }

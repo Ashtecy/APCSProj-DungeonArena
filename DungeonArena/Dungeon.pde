@@ -24,14 +24,14 @@ class Dungeon {
           //map[j][i].setXY(j,i);
         } else {
           map[j][i]=new Tile(r.nextInt(3), tileSize);
-          //map[j][i].setXY(j,i);
+         // map[j][i].setXY(j,i);
         }
       }
     }
   }
 
   void spawnGuy() {
-    if (guy==null) {
+    while (guy==null) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall()) {
@@ -41,7 +41,6 @@ class Dungeon {
   }
 
   void setupCamera() {
-    Adventurer a = new Adventurer("A", 2, 2);
     int cX = guy.getX()-3;
     int cY = guy.getY()-3;
     for (int i=cX; i<cX+7; i++) {
@@ -76,7 +75,7 @@ class Dungeon {
   }
 
   Tile getTile(int xpos, int ypos) {
-    return map[xpos / tileSize][ypos / tileSize];
+    return map[xpos][ypos];
   }
 }
 

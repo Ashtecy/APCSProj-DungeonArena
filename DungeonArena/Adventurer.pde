@@ -12,7 +12,6 @@ class Adventurer extends Being {
     setLVL(1);
     setEXP(0);
     setImage("man.png");
-    System.out.println("AAA");
   }
 
   Adventurer(String name, int x, int y) {
@@ -84,15 +83,15 @@ class Adventurer extends Being {
   }
 
   void pickUp(Item it) {
-    if (inv.add(it)) {
-      it.pickUp();
-    }
+    inv.add(it);
   }
 
   void useConsumable(int ind) {
     if (inv.use(ind) != null) {
       inv.use(ind).use(this);
     }
+    
+    System.out.println("AB");
   }
 
   void updateStats() {
@@ -108,10 +107,6 @@ class Adventurer extends Being {
 
   void drop(int inInd) {
     inv.drop(inInd);
-  }
-
-  void stamp() {
-    ellipse(getX(), getY(), 20, 20);
   }
 }
 

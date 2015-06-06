@@ -20,13 +20,13 @@ class MapObject {
   }
 
   void setX (int newX) {
-    if (newX!=0 && newX!=cols*tileSize) {
+    if (newX > 0 && newX < cols*tileSize) {
       x = newX;
     }
   }
 
   void setY (int newY) {
-    if (newY!=0 && newY!=rows*tileSize) {
+    if (newY > 0 && newY < rows*tileSize) {
       y = newY;
     }
   }
