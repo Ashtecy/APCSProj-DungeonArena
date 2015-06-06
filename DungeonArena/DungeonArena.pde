@@ -48,23 +48,39 @@ void keyPressed() {
     seed=System.currentTimeMillis();
     MODE=0;
   }
-  if (keyCode==97) {
-    arena.getGuy().setXY(arena.getGuy().getX()-1, arena.getGuy().getY()+1);
-  } else if (keyCode==98) {
-    arena.getGuy().setY(arena.getGuy().getY()+1);
-  } else if (keyCode==99) {
-    arena.getGuy().setXY(arena.getGuy().getX()+1, arena.getGuy().getY()+1);
-  } else if (keyCode==100) {
-    arena.getGuy().setX(arena.getGuy().getX()-1);
-  } else if (keyCode==102) {
-    arena.getGuy().setX(arena.getGuy().getX()+1);
-  } else if (keyCode==103) {
-    arena.getGuy().setXY(arena.getGuy().getX()-1, arena.getGuy().getY()-1);
-  } else if (keyCode==104) {
-    arena.getGuy().setY(arena.getGuy().getY()-1);
-  } else if (keyCode==105) {
-    arena.getGuy().setXY(arena.getGuy().getX()+1, arena.getGuy().getY()-1);
-  }
+   if(keyCode==97){
+     if(!arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()+1].isWall()){
+       arena.getGuy().setXY(arena.getGuy().getX()-1,arena.getGuy().getY()+1); 
+     }
+   }else if(keyCode==98){
+     if(arena.getMap()[arena.getGuy().getX()][arena.getGuy().getY()+1].isWall()==false){
+       arena.getGuy().setY(arena.getGuy().getY()+1);  
+     }
+   }else if(keyCode==99){
+     if(arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()+1].isWall()==false){
+       arena.getGuy().setXY(arena.getGuy().getX()+1,arena.getGuy().getY()+1);  
+     }
+   }else if(keyCode==100){
+     if(arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()].isWall()==false){
+       arena.getGuy().setX(arena.getGuy().getX()-1);  
+     }  
+   }else if(keyCode==102){
+     if(arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()].isWall()==false){
+       arena.getGuy().setX(arena.getGuy().getX()+1);  
+     }
+   }else if(keyCode==103){
+     if(arena.getMap()[arena.getGuy().getX()-1][arena.getGuy().getY()-1].isWall()==false){
+       arena.getGuy().setXY(arena.getGuy().getX()-1,arena.getGuy().getY()-1);  
+     }
+   }else if(keyCode==104){
+     if(arena.getMap()[arena.getGuy().getX()][arena.getGuy().getY()-1].isWall()==false){
+       arena.getGuy().setY(arena.getGuy().getY()-1);  
+     }  
+   }else if(keyCode==105){
+     if(arena.getMap()[arena.getGuy().getX()+1][arena.getGuy().getY()-1].isWall()==false){
+       arena.getGuy().setXY(arena.getGuy().getX()+1,arena.getGuy().getY()-1);  
+     }
+   }
 }
 
 void loadingScreen() {
