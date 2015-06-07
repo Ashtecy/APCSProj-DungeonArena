@@ -21,10 +21,10 @@ class Dungeon {
       for (int j=0; j<map.length; j++) {
         if (i==0||j==0||i==map[0].length-1||j==map.length-1) {
           map[j][i]=new Tile(0, tileSize);
-          //map[j][i].setXY(j,i);
+          //     map[j][i].setXY(j,i);
         } else {
           map[j][i]=new Tile(r.nextInt(3), tileSize);
-         // map[j][i].setXY(j,i);
+          // map[j][i].setXY(j,i);
         }
       }
     }
@@ -41,28 +41,29 @@ class Dungeon {
   }
 
   void setupCamera() {
+    Tile temp = new Tile(0, tileSize);
     int cX = guy.getX()-3;
     int cY = guy.getY()-3;
     for (int i=cX; i<cX+7; i++) {
       for (int j=cY; j<cY+7; j++) {
         if (i<0||j<0||i>rows-1||j>cols-1) {
-          camera[i-cX][j-cY]=new Tile(0, tileSize);
-          camera[i-cX][j-cY].setXY(i-cX, j-cY);
+          camera[i-cX][j-cY]=temp;
         } else {
           camera[i-cX][j-cY]=map[i][j];
-          camera[i-cX][j-cY].setXY(i-cX, j-cY);
         }
+        camera[i-cX][j-cY].setXY(i-cX, j-cY);
+        camera[i-cX][j-cY].draw();
       }
     }
   }
 
   void draw() {
-    setupCamera();
-    for (Tile[] e : camera) {
-      for (Tile f : e) {
-        f.draw();
-      }
-    }
+    setupCamera();/* 
+     for (Tile[] e : camera) {
+     for (Tile f : e) {
+     f.draw();
+     }
+     }*/
     guy.draw();
   }
 

@@ -18,6 +18,10 @@ class MapObject {
   int getY () {
     return y;
   }
+   
+   String setName(){
+    return name; 
+   }
 
   void setX (int newX) {
     if (newX > 0 && newX < cols*tileSize) {

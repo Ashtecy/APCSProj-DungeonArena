@@ -8,7 +8,7 @@ class Adventurer extends Being {
     super(name, x, y);
     stats = new Stats(str, dex, in);
     equiptment = new Stats(0, 0, 0);
-    inv = new Inventory(20);
+    inv = new Inventory(16);
     setLVL(1);
     setEXP(0);
     setImage("man.png");
@@ -86,12 +86,10 @@ class Adventurer extends Being {
     inv.add(it);
   }
 
-  void useConsumable(int ind) {
-    if (inv.use(ind) != null) {
-      inv.use(ind).use(this);
+  void use(int ind) {
+    if (inv.get(ind) != null) {
+      inv.use(ind, this);
     }
-    
-    System.out.println("AB");
   }
 
   void updateStats() {
@@ -105,8 +103,8 @@ class Adventurer extends Being {
     inv.getWeapon().applyBuffs(equiptment);
   }
 
-  void drop(int inInd) {
-    inv.drop(inInd);
+  void drop(int inInd, Tile t) {
+    inv.drop(inInd, t, getX(), getY());
   }
 }
 

@@ -10,7 +10,12 @@ class Tile {
   Tile(int n, int tileSize) {
     this.tileSize=tileSize;
     isWall=(n==0);
-    addDrop(new Consumable(x,y));
+    if (Math.random() < 0.05) {
+      addDrop(new Consumable(x, y));
+    }
+    if (Math.random() < 0.1) {
+      addDrop(new Equiptment("ASD", (int)(Math.random() * 6), x, y));
+    }
     if (isWall()) {
       setImage("wall.png");
     } else {
@@ -57,10 +62,9 @@ class Tile {
   void draw() {
     imageMode(CORNER);
     image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
-    if (!isWall()) {
-      for (Item o : drops) {
-        o.draw();
-      }
+    if (!isWall() && drops.size() > 0) {
+      drops.get(drops.size() - 1).setXY(x, y);
+      drops.get(drops.size() - 1).draw();
     }
   }
 }
