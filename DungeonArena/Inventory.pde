@@ -26,9 +26,11 @@ class Inventory {
   }
 
   void drop (int inInd, Tile t, int x, int y) {
-    Item removed = items.remove(inInd);
-    removed.setXY(x, y);
-    removed.drop(t);
+    if (inInd >= 0 && inInd < items.size()) {
+      Item removed = items.remove(inInd);
+      removed.setXY(x, y);
+      removed.drop(t);
+    }
   }
 
   void equipt (int ind) {
