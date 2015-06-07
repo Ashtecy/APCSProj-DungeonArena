@@ -14,7 +14,7 @@ class Dungeon {
     monsters = new ArrayList<Creature>();
     generateMap();  
     spawnGuy();
-    while (monsters.size () < 6) {
+    while (monsters.size () < 1) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall() && map[x][y].occupant == null) {
@@ -91,11 +91,15 @@ class Dungeon {
   int getWidth() {
     return map[0].length;
   }
-  /*
+
   void creatureMove() {
-   for (Creature c : monsters) {
-   c.act(this);
-   }
-   }*/
+    for (Creature c : monsters) {
+      c.act(this);
+    }
+  }
+  
+  ArrayList<Creature> getMonsters(){
+   return monsters; 
+  }
 }
 

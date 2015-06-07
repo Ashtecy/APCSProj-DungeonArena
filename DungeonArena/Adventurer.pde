@@ -17,12 +17,12 @@ class Adventurer extends Being {
   Adventurer(String name, int x, int y) {
     this(name, x, y, 10, 10, 10);
   }
-/*
+
   void draw() {
     imageMode(CENTER);
     image(W, tileSize*(3.5), tileSize*(3.5), 0.8*tileSize, 0.8*tileSize);
   }
-*/
+
   int getSTR() {
     return stats.getSTR() + equiptment.getSTR();
   }
@@ -73,11 +73,11 @@ class Adventurer extends Being {
     PTS = 3;
   }
 
-  void attack(Being other) {
+  void attack(Dungeon d, Being other) {
     if (isInRange(other, 1)) {
       other.setHP(other.getHP() - getSTR());
       if (other.getHP() <= 0) {
-        other.die();
+        other.die(d);
       }
     }
   }
@@ -106,10 +106,6 @@ class Adventurer extends Being {
   void drop(int inInd, Tile t) {
     inv.drop(inInd, t, getX(), getY());
   }
-  
-    void draw() {
-    imageMode(CENTER);
-    image(W, tileSize*(3.5), tileSize*(3.5), 0.8*tileSize, 0.8*tileSize);
-  }
+
 }
 

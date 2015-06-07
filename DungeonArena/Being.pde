@@ -51,9 +51,9 @@ abstract class Being extends MapObject {
   }
 
   void attack(Being other) {
-    other.setHP((int)(other.getHP() - 1  - Math.random() * 5));
+    other.setHP((int)(other.getHP() - 1  - Math.random() * 3));
   }
-/*
+
   void act(Dungeon d) {
     Adventurer a = d.getGuy();
     int xf = getX();
@@ -68,7 +68,7 @@ abstract class Being extends MapObject {
         } else if (a.getX() < getX()) {
           xf = getX() - 1;
         }
-        if (xf >= 0 && xf < d.getWidth() && !d.getTile(xf, yf).isWall() && d.getTile(xf, yf).occupant() != null) {
+        if (xf < 0 || xf >= d.getWidth() || d.getTile(xf, yf).isWall() || d.getTile(xf, yf).occupant() != null) {
           xf = getX();
         }
         if (a.getY() > getY()) {
@@ -76,23 +76,36 @@ abstract class Being extends MapObject {
         } else if (a.getY() < getY()) {
           yf = getY() - 1;
         }
-        if (yf >= 0 && yf < d.getHeight() && !d.getTile(xf, yf).isWall() && d.getTile(xf, yf).occupant() != null) {
+        if (yf < 0 || yf >= d.getHeight() || d.getTile(xf, yf).isWall() || d.getTile(xf, yf).occupant() != null) {
           yf = getY();
         }
+        setXY(xf, yf);
       }
     }
     d.getTile(getX(), getY()).setOccupant(this);
-  }*/
+  }
 
   boolean isInRange (Being b, int rad) {
-    if (b.getX() - getX() <= rad && b.getY() - getY() <= rad) {
+    if (Math.abs(b.getX() - getX()) <= rad && Math.abs(b.getY() - getY()) <= rad) {
       return true;
     } else {
       return false;
     }
   }
 
-  void die() {
+  void die(Dungeon d) {
+    if (Math.random() < 0.25) {
+      d.getTile(getX(), getY()).addDrop(new Consumable(getX(), getY()));
+    }
+    if (Math.random() < 0.05) {
+      d.getTile(getX(), getY()).addDrop(new Equiptment("Stolen Armor", (int)(1 + Math.random() * 5), getX(), getY()));
+    }
+    d.getTile(getX(), getY()).setOccupant(null);
+    for (int i = 0; i < d.getMonsters().size(); i++) {
+      if (d.getMonsters().get(i).equals(this)) {
+        d.getMonsters().remove(i);
+      }
+    }
   }
 
   void drop(Dungeon d, Item drop) {

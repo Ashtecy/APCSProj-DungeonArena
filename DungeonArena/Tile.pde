@@ -76,8 +76,7 @@ class Tile {
       drops.get(drops.size() - 1).draw();
     }
     if (occupant != null) {
-      occupant.setXY(x, y);
-      occupant.draw();
+      occupant.draw(x, y);
     }
   }
 }

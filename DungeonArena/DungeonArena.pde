@@ -68,39 +68,55 @@ void keyPressed() {
     guy.drop(trackInventory, arena.getTile(guy.getX(), guy.getY()));
   }
   if (keyCode==97) {
-    if (!arena.getMap()[guy.getX()-1][guy.getY()+1].isWall() && arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() == null) {
+    if (arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()+1].occupant());
+    } else if (!arena.getMap()[guy.getX()-1][guy.getY()+1].isWall()) {
       guy.setXY(guy.getX()-1, guy.getY()+1);
     }
   } else if (keyCode==98) {
-    if (!arena.getMap()[guy.getX()][guy.getY()+1].isWall() && arena.getMap()[guy.getX()][guy.getY()+1].occupant() == null) {
+    if (arena.getMap()[guy.getX()][guy.getY()+1].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()][guy.getY()+1].occupant());
+    } else if (!arena.getMap()[guy.getX()][guy.getY()+1].isWall()) {
       guy.setY(guy.getY()+1);
     }
   } else if (keyCode==99) {
-    if (!arena.getMap()[guy.getX()+1][guy.getY()+1].isWall() && arena.getMap()[guy.getX()+1][guy.getY()+1].occupant() == null) {
+    if (arena.getMap()[guy.getX()+1][guy.getY()+1].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()+1].occupant());
+    } else if (!arena.getMap()[guy.getX()+1][guy.getY()+1].isWall()) {
       guy.setXY(guy.getX()+1, guy.getY()+1);
     }
   } else if (keyCode==100) {
-    if (!arena.getMap()[guy.getX()-1][guy.getY()].isWall() && arena.getMap()[guy.getX()-1][guy.getY()].occupant() == null) {
+    if (arena.getMap()[guy.getX()-1][guy.getY()].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()].occupant());
+    } else if (!arena.getMap()[guy.getX()-1][guy.getY()].isWall()) {
       guy.setX(guy.getX()-1);
     }
   } else if (keyCode==102) {
-    if (!arena.getMap()[guy.getX()+1][guy.getY()].isWall() && arena.getMap()[guy.getX()+1][guy.getY()].occupant() == null) {
+    if (arena.getMap()[guy.getX()+1][guy.getY()].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()].occupant());
+    } else if (!arena.getMap()[guy.getX()+1][guy.getY()].isWall()) {
       guy.setX(guy.getX()+1);
     }
   } else if (keyCode==103) {
-    if (!arena.getMap()[guy.getX()-1][guy.getY()-1].isWall() && arena.getMap()[guy.getX()-1][guy.getY()-1].occupant() == null) {
+    if (arena.getMap()[guy.getX()-1][guy.getY()-1].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()-1].occupant());
+    } else if (!arena.getMap()[guy.getX()-1][guy.getY()-1].isWall()) {
       guy.setXY(guy.getX()-1, guy.getY()-1);
     }
   } else if (keyCode==104) {
-    if (!arena.getMap()[guy.getX()][guy.getY()-1].isWall() && arena.getMap()[guy.getX()][guy.getY()-1].occupant() == null) {
+    if (arena.getMap()[guy.getX()][guy.getY()-1].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()][guy.getY()-1].occupant());
+    } else if (!arena.getMap()[guy.getX()][guy.getY()-1].isWall()) {
       guy.setY(guy.getY()-1);
     }
   } else if (keyCode==105) {
-    if (!arena.getMap()[guy.getX()+1][guy.getY()-1].isWall() && arena.getMap()[guy.getX()+1][guy.getY()-1].occupant() == null) {
+    if (arena.getMap()[guy.getX()+1][guy.getY()-1].occupant() != null) {
+      guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()-1].occupant());
+    } else if (!arena.getMap()[guy.getX()+1][guy.getY()-1].isWall()) {
       guy.setXY(guy.getX()+1, guy.getY()-1);
     }
   }
-  // arena.creatureMove();
+  arena.creatureMove();
 }
 
 void loadingScreen() {
