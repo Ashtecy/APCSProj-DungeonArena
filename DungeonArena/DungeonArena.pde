@@ -16,7 +16,7 @@ void setup() {
   P2 = loadImage("play2.png");
   L = loadImage("loading.png");
   S = loadImage("side.png");
-  arena = new Dungeon(12, 15, seed, tileSize);
+  arena = new Dungeon(30, 30, seed, tileSize);
   trackInventory = 0;
 }
 
