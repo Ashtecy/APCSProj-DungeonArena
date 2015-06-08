@@ -5,7 +5,7 @@ protected long seed;
 protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
-protected PImage Title, P1, P2, L, S;
+protected PImage Title, P1, P2, L, S,T;
 
 void setup() {
   size(960, 800);
@@ -16,6 +16,7 @@ void setup() {
   P2 = loadImage("play2.png");
   L = loadImage("loading.png");
   S = loadImage("side.png");
+  T = loadImage("text.png");
   arena = new Dungeon(30, 30, seed, tileSize);
   trackInventory = 0;
 }
@@ -36,6 +37,7 @@ void draw() {
   } else if (MODE==1) {
     arena.draw();
     sideScreen();
+    textBox();
   } else if (MODE==2) {
     scoreScreen();
   }
@@ -105,15 +107,15 @@ void keyPressed() {
 void loadingScreen() {
   background(0);
   imageMode(CORNER);
-  image(L, 625, 690, 300, 60);
+  image(L, 625, 720, 300, 60);
 }
 
 void sideScreen() {
   Adventurer guy = arena.getGuy();
   imageMode(CORNER);
-  for (int i=0; i<800; i+=128) {
-    for (int j=560; j<960; j+=128) {
-      image(S, j, i, 128, 128);
+  for (int i=0; i<800; i+=80) {
+    for (int j=560; j<960; j+=80) {
+      image(S, j, i, 80, 80);
     }
   }
   for (int i = 0; i < guy.inv.size (); i++) {
@@ -148,5 +150,14 @@ void scoreScreen() {
   fill(0, 0, 0);
   textAlign(CENTER);
   text(arena.getGuy().getStats(), width / 2, height / 2);
+  image(Title,760,100,250,80);
 }
 
+void textBox(){
+  imageMode(CORNER);
+  for (int i=560; i<800; i+=tileSize) {
+    for (int j=0; j<tileSize*7; j+=tileSize) {
+      image(T, j, i, tileSize, tileSize);
+    }
+  }
+}  
