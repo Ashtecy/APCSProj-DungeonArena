@@ -12,7 +12,6 @@ class Equiptment extends Item {
     }
   }
 
-
   int getSTR() {
     return stats.getSTR();
   }
