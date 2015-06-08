@@ -1,4 +1,4 @@
-Dungeon Arena 1 (Temporary Name)
+Dungeon Arena 1 (Test Case)
 
 Description: A single stage dungeon crawler where the player will be pitted against an AI combatant. Both will explore a single large dungeon level with the goal of either defeating the other or defeating the dungeon boss in mind.
 
@@ -28,3 +28,7 @@ June 2, 2015 Broke movement and camera
 June 4, 2015 Fixed movement and camera. player still walks through walls but that will be resolved shortly.
 
 June 4, 2015 Better movement. Added a score screen as well, but it doesn't hold much information.
+
+June 6, 2015 Player can pick up drops.
+
+June 7, 2015 The player can attack and dead beings will drop items. Ending screen added.
