@@ -10,12 +10,12 @@ abstract class Being extends MapObject {
   }
 
   Being(String n, int x, int y) {
-    super(n,x,y);
+    super(n, x, y);
     setMaxHP(20);
     setHP(20);
     isAlive = true;
     range = 1;
-    sight = 5;
+    sight = 3;
   }
 
   String getName() {
@@ -50,54 +50,70 @@ abstract class Being extends MapObject {
     return getName() + " " + getHP() + " HP";
   }
 
-  void move(int x, int y) {
-    setXY(x, y);
-  }
-
   void attack(Being other) {
-    other.setHP((int)(other.getHP() - 1  - Math.random() * 5));
+    other.setHP((int)(other.getHP() - 1  - Math.random() * 3));
   }
 
   void act(Dungeon d) {
     Adventurer a = d.getGuy();
+    int xf = getX();
+    int yf = getY();    
+    d.getTile(getX(), getY()).setOccupant(null);
     if (isInRange(a, sight)) {
       if (isInRange(a, range)) {
         attack(a);
       } else {
         if (a.getX() > getX()) {
-          move(getX() + 1, getY());
+          xf = getX() + 1;
         } else if (a.getX() < getX()) {
-          move(getX() - 1, getY());
+          xf = getX() - 1;
+        }
+        if (xf < 0 || xf >= d.getWidth() || d.getTile(xf, yf).isWall() || d.getTile(xf, yf).occupant() != null) {
+          xf = getX();
         }
         if (a.getY() > getY()) {
-          move(getX(), getY() + 1);
-        } else {
-          move(getX(), getY() - 1);
+          yf = getY() + 1;
+        } else if (a.getY() < getY()) {
+          yf = getY() - 1;
         }
+        if (yf < 0 || yf >= d.getHeight() || d.getTile(xf, yf).isWall() || d.getTile(xf, yf).occupant() != null) {
+          yf = getY();
+        }
+        setXY(xf, yf);
       }
-    } else {
-      move(getX(), getY());
     }
+    d.getTile(getX(), getY()).setOccupant(this);
   }
 
   boolean isInRange (Being b, int rad) {
-    if (b.getX() - getX() <= rad && b.getY() - getY() <= rad) {
+    if (Math.abs(b.getX() - getX()) <= rad && Math.abs(b.getY() - getY()) <= rad) {
       return true;
     } else {
       return false;
     }
   }
 
-  void die() {
-
-}
+  void die(Dungeon d) {
+    if (Math.random() < 0.25) {
+      d.getTile(getX(), getY()).addDrop(new Consumable(getX(), getY()));
+    }
+    if (Math.random() < 0.05) {
+      d.getTile(getX(), getY()).addDrop(new Equiptment("Stolen Armor", (int)(1 + Math.random() * 5), getX(), getY()));
+    }
+    d.getTile(getX(), getY()).setOccupant(null);
+    for (int i = 0; i < d.getMonsters().size(); i++) {
+      if (d.getMonsters().get(i).equals(this)) {
+        d.getMonsters().remove(i);
+      }
+    }
+  }
 
   void drop(Dungeon d, Item drop) {
     getTile(d, getX(), getY()).addDrop(drop);
   }
 
   Tile getTile(Dungeon d, int x, int y) {
-   return d.getTile(x, y);
+    return d.getTile(x, y);
   }
 }     
 

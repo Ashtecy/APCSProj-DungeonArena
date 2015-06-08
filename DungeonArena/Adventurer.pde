@@ -73,11 +73,11 @@ class Adventurer extends Being {
     PTS = 3;
   }
 
-  void attack(Being other) {
+  void attack(Dungeon d, Being other) {
     if (isInRange(other, 1)) {
       other.setHP(other.getHP() - getSTR());
       if (other.getHP() <= 0) {
-        other.die();
+        other.die(d);
       }
     }
   }
@@ -106,5 +106,6 @@ class Adventurer extends Being {
   void drop(int inInd, Tile t) {
     inv.drop(inInd, t, getX(), getY());
   }
+
 }
 

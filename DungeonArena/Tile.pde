@@ -1,6 +1,7 @@
 class Tile {
 
   protected boolean isWall;
+  protected Being occupant;
   protected int x, y;
   protected Random r = new Random();
   protected int tileSize;
@@ -13,8 +14,8 @@ class Tile {
     if (Math.random() < 0.05) {
       addDrop(new Consumable(x, y));
     }
-    if (Math.random() < 0.1) {
-      addDrop(new Equiptment("ASD", (int)(Math.random() * 6), x, y));
+    if (Math.random() < 0.02) {
+      addDrop(new Equiptment("ASD", 1 + (int)(Math.random() * 5), x, y));
     }
     if (isWall()) {
       setImage("wall.png");
@@ -48,6 +49,10 @@ class Tile {
     return isWall;
   }
 
+  Being occupant() {
+    return occupant;
+  }
+
   void addDrop(Item i) {
     drops.add(i);
   }
@@ -59,12 +64,19 @@ class Tile {
     return null;
   }
 
+  void setOccupant(Being b) {
+    occupant = b;
+  }
+
   void draw() {
     imageMode(CORNER);
     image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
     if (!isWall() && drops.size() > 0) {
       drops.get(drops.size() - 1).setXY(x, y);
       drops.get(drops.size() - 1).draw();
+    }
+    if (occupant != null) {
+      occupant.draw(x, y);
     }
   }
 }

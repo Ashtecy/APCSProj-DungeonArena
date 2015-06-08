@@ -44,63 +44,89 @@ void draw() {
 }
 
 void keyPressed() {
-  Adventurer guy = arena.getGuy();
-  if (keyCode==8 && MODE==1) {
-    seed=System.currentTimeMillis();
-    MODE=0;
-  }
-  if (keyCode==32) {
-    int x = guy.getX();
-    int y = guy.getY();
-    Item topDrop = arena.getTile(x, y).removeDrop();
-    if (topDrop != null) {
-      guy.pickUp(topDrop);
+  if (MODE == 1) {
+    Adventurer guy = arena.getGuy();
+    if (keyCode==8 && MODE==1) {
+      seed=System.currentTimeMillis();
+      MODE=0;
     }
-  }
-  if (keyCode == 81 && trackInventory > 0) {//scrolling through inventory < q
-    trackInventory --;
-  }
-  if (keyCode == 87 && trackInventory < guy.inv.size() - 1) {//scrolling through inventory > w
-    trackInventory ++;
-  }
-  if (keyCode == 69 && guy.inv.get(trackInventory) != null) {//e to use/equipt
-    guy.use(trackInventory);
-  }
-  if (keyCode == 68) { //d to drop
-    guy.drop(trackInventory, arena.getTile(guy.getX(), guy.getY()));
-  }
-  if (keyCode==97) {
-    if (!arena.getMap()[guy.getX()-1][guy.getY()+1].isWall()) {
-      guy.setXY(guy.getX()-1, guy.getY()+1);
+    if (keyCode==32) {
+      int x = guy.getX();
+      int y = guy.getY();
+      Item topDrop = arena.getTile(x, y).removeDrop();
+      if (topDrop != null) {
+        guy.pickUp(topDrop);
+      }
     }
-  } else if (keyCode==98) {
-    if (arena.getMap()[guy.getX()][guy.getY()+1].isWall()==false) {
-      guy.setY(guy.getY()+1);
+    if (keyCode == 81 && trackInventory > 0) {//scrolling through inventory < q
+      trackInventory --;
     }
-  } else if (keyCode==99) {
-    if (arena.getMap()[guy.getX()+1][guy.getY()+1].isWall()==false) {
-      guy.setXY(guy.getX()+1, guy.getY()+1);
+    if (keyCode == 87 && trackInventory < guy.inv.size() - 1) {//scrolling through inventory > w
+      trackInventory ++;
     }
-  } else if (keyCode==100) {
-    if (arena.getMap()[guy.getX()-1][guy.getY()].isWall()==false) {
-      guy.setX(guy.getX()-1);
+    if (keyCode == 69 && guy.inv.get(trackInventory) != null) {//e to use/equipt
+      guy.use(trackInventory);
     }
-  } else if (keyCode==102) {
-    if (arena.getMap()[guy.getX()+1][guy.getY()].isWall()==false) {
-      guy.setX(guy.getX()+1);
+    if (keyCode == 68) { //d to drop
+      guy.drop(trackInventory, arena.getTile(guy.getX(), guy.getY()));
     }
-  } else if (keyCode==103) {
-    if (arena.getMap()[guy.getX()-1][guy.getY()-1].isWall()==false) {
-      guy.setXY(guy.getX()-1, guy.getY()-1);
+    if (keyCode==97) {
+      if (arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()+1].occupant());
+      } else if (!arena.getMap()[guy.getX()-1][guy.getY()+1].isWall()) {
+        guy.setXY(guy.getX()-1, guy.getY()+1);
+      }
+    } else if (keyCode==98) {
+      if (arena.getMap()[guy.getX()][guy.getY()+1].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()][guy.getY()+1].occupant());
+      } else if (!arena.getMap()[guy.getX()][guy.getY()+1].isWall()) {
+        guy.setY(guy.getY()+1);
+      }
+    } else if (keyCode==99) {
+      if (arena.getMap()[guy.getX()+1][guy.getY()+1].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()+1].occupant());
+      } else if (!arena.getMap()[guy.getX()+1][guy.getY()+1].isWall()) {
+        guy.setXY(guy.getX()+1, guy.getY()+1);
+      }
+    } else if (keyCode==100) {
+      if (arena.getMap()[guy.getX()-1][guy.getY()].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()].occupant());
+      } else if (!arena.getMap()[guy.getX()-1][guy.getY()].isWall()) {
+        guy.setX(guy.getX()-1);
+      }
+    } else if (keyCode==102) {
+      if (arena.getMap()[guy.getX()+1][guy.getY()].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()].occupant());
+      } else if (!arena.getMap()[guy.getX()+1][guy.getY()].isWall()) {
+        guy.setX(guy.getX()+1);
+      }
+    } else if (keyCode==103) {
+      if (arena.getMap()[guy.getX()-1][guy.getY()-1].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()-1].occupant());
+      } else if (!arena.getMap()[guy.getX()-1][guy.getY()-1].isWall()) {
+        guy.setXY(guy.getX()-1, guy.getY()-1);
+      }
+    } else if (keyCode==104) {
+      if (arena.getMap()[guy.getX()][guy.getY()-1].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()][guy.getY()-1].occupant());
+      } else if (!arena.getMap()[guy.getX()][guy.getY()-1].isWall()) {
+        guy.setY(guy.getY()-1);
+      }
+    } else if (keyCode==105) {
+      if (arena.getMap()[guy.getX()+1][guy.getY()-1].occupant() != null) {
+        guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()-1].occupant());
+      } else if (!arena.getMap()[guy.getX()+1][guy.getY()-1].isWall()) {
+        guy.setXY(guy.getX()+1, guy.getY()-1);
+      }
     }
-  } else if (keyCode==104) {
-    if (arena.getMap()[guy.getX()][guy.getY()-1].isWall()==false) {
-      guy.setY(guy.getY()-1);
+    arena.creatureMove();
+    if (guy.getHP() <= 0) {
+      MODE = 2;
     }
-  } else if (keyCode==105) {
-    if (arena.getMap()[guy.getX()+1][guy.getY()-1].isWall()==false) {
-      guy.setXY(guy.getX()+1, guy.getY()-1);
-    }
+  }else if (MODE == 2){
+   if (keyCode == 32){
+    setup();
+   } 
   }
 }
 
@@ -131,6 +157,7 @@ void sideScreen() {
   }
   fill(255);
   textSize(18);
+  textAlign(LEFT);
   image(guy.getImage(), 560, height / 4, 100, 100);
   text(guy.getName() + " the Adventurer", 660, height / 4); 
   text(guy.getHP() + " / " + guy.getMaxHP() + " HP", 660, height / 4 + 20); 
@@ -149,8 +176,12 @@ void scoreScreen() {
   textSize(20);
   fill(0, 0, 0);
   textAlign(CENTER);
-  text(arena.getGuy().getStats(), width / 2, height / 2);
-  image(Title,760,100,250,80);
+  text(arena.getGuy().getName() + " the Adventurer, may he rest in pieces", width / 2, height / 2 + 20); 
+  text(arena.getGuy().getHP() + " / " + arena.getGuy().getMaxHP() + " HP", width / 2, height / 2 + 40); 
+  text(arena.getGuy().getSTR() + "STR", width / 2, height / 2 + 60);  
+  text(arena.getGuy().getDEX() + "DEX", width / 2, height / 2 + 80);  
+  text(arena.getGuy().getINT() + "INT", width / 2, height / 2 + 100); 
+  text("Press SPACEBAR to start a new game", width / 2, height / 2 + 120);
 }
 
 void textBox(){
