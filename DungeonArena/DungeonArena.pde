@@ -68,6 +68,9 @@ void keyPressed() {
     if (keyCode == 68) { //d to drop
       guy.drop(trackInventory, arena.getTile(guy.getX(), guy.getY()));
     }
+    if (keyCode == 90) {
+      guy.spinSlash(arena);
+    }
     if (keyCode==97) {
       if (arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() != null) {
         guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()+1].occupant());
@@ -121,10 +124,10 @@ void keyPressed() {
     if (guy.getHP() <= 0) {
       MODE = 2;
     }
-  }else if (MODE == 2){
-   if (keyCode == 32){
-    setup();
-   } 
+  } else if (MODE == 2) {
+    if (keyCode == 32) {
+      setup();
+    }
   }
 }
 

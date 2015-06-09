@@ -1,6 +1,6 @@
 class Adventurer extends Being {
 
-  private int LVL, EXP, PTS;
+  private int LVL, MP, EXP, PTS;
   protected Inventory inv;// = new Inventory(20);
   private Stats stats, equiptment;
 
@@ -43,6 +43,10 @@ class Adventurer extends Being {
     return PTS;
   }
 
+  int getMP() {
+    return MP;
+  }
+
   void setSTR(int s) {
     stats.setSTR(s);
   }
@@ -53,6 +57,10 @@ class Adventurer extends Being {
 
   void setINT(int i) {
     stats.setINT(i);
+  }
+
+  void setMP(int m) {
+    MP = m;
   }
 
   void setLVL(int l) {
@@ -74,7 +82,7 @@ class Adventurer extends Being {
   }
 
   void attack(Dungeon d, Being other) {
-    if (isInRange(other, 1)) {
+    if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
       other.setHP(other.getHP() - getSTR());
       if (other.getHP() <= 0) {
         other.die(d);
@@ -107,5 +115,19 @@ class Adventurer extends Being {
     inv.drop(inInd, t, getX(), getY());
   }
 
+  void spinSlash(Dungeon d) {
+    for (int r = 2; r < 4; r++) {
+      for (int c = 2; c < 4; c++) {
+        if (d.getCamera()[r][c].occupant() != null) {
+          attack(d, d.getCamera()[r][c].occupant());
+        }
+      }
+    }
+  }
+  /*
+  void doubleSlash(Dungeon d, Being other) {
+   attack(d, other);
+   attack(d, other);
+   }*/
 }
 

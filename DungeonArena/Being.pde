@@ -101,7 +101,7 @@ abstract class Being extends MapObject {
       d.getTile(getX(), getY()).addDrop(new Equiptment("Stolen Armor", (int)(1 + Math.random() * 5), getX(), getY()));
     }
     d.getTile(getX(), getY()).setOccupant(null);
-    for (int i = 0; i < d.getMonsters().size(); i++) {
+    for (int i = 0; i < d.getMonsters ().size(); i++) {
       if (d.getMonsters().get(i).equals(this)) {
         d.getMonsters().remove(i);
       }
@@ -114,6 +114,14 @@ abstract class Being extends MapObject {
 
   Tile getTile(Dungeon d, int x, int y) {
     return d.getTile(x, y);
+  }
+
+  void draw(int x, int y) {
+    imageMode(CENTER);
+    image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
+    fill(255);
+    textAlign(CENTER);
+    text(getHP() + " HP", tileSize*x + tileSize/2, tileSize*y + tileSize);
   }
 }     
 

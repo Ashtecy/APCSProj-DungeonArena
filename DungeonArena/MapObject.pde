@@ -53,9 +53,9 @@ class MapObject {
     image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
   }
 
-  void draw(int xi, int yi) {
+  void draw(int x, int y) {
     imageMode(CENTER);
-    image(W, tileSize*xi+tileSize/2, tileSize*yi+tileSize/2, 0.75*tileSize, 0.75*tileSize);
+    image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
   }
 }
 

@@ -14,7 +14,7 @@ class Dungeon {
     monsters = new ArrayList<Creature>();
     generateMap();  
     spawnGuy();
-    while (monsters.size () < 5) {
+    while (monsters.size () < 10) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall() && map[x][y].occupant == null) {
@@ -56,13 +56,14 @@ class Dungeon {
     int cY = guy.getY()-3;
     for (int i=cX; i<cX+7; i++) {
       for (int j=cY; j<cY+7; j++) {
+        
         if (i<0||j<0||i>rows-1||j>cols-1) {
-          camera[i-cX][j-cY]=temp;
-        } else {
-          camera[i-cX][j-cY]=map[i][j];
-        }
-        camera[i-cX][j-cY].setXY(i-cX, j-cY);
-        camera[i-cX][j-cY].draw();
+         camera[i-cX][j-cY]=temp;
+         }else {
+         camera[i-cX][j-cY]=map[i][j];
+         }
+         camera[i-cX][j-cY].setXY(i-cX, j-cY);
+         camera[i-cX][j-cY].draw();
       }
     }
   }
@@ -78,6 +79,10 @@ class Dungeon {
 
   Tile[][] getMap() {
     return map;
+  }
+
+  Tile[][] getCamera() {
+    return camera;
   }
 
   Tile getTile(int xpos, int ypos) {
@@ -97,9 +102,9 @@ class Dungeon {
       c.act(this);
     }
   }
-  
-  ArrayList<Creature> getMonsters(){
-   return monsters; 
+
+  ArrayList<Creature> getMonsters() {
+    return monsters;
   }
 }
 

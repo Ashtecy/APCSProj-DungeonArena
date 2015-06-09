@@ -5,6 +5,13 @@ class Creature extends Being {
     setImage("creature.png");
   }
 
-
+  void attack(Being other) {
+    if (Math.random() < 0.75) {
+      other.setHP((int)(other.getHP() - 1  - Math.random() * 3));
+    }
+  }
+  
+  
+  
 }
 
