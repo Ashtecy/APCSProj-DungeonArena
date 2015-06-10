@@ -5,7 +5,7 @@ protected long seed;
 protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
-protected PImage Title, P1, P2, L, S,T;
+protected PImage Title, P1, P2, L, S, T, W1, W2;
 
 void setup() {
   size(960, 800);
