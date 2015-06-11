@@ -150,10 +150,10 @@ void scoreScreen() {
   fill(0, 0, 0);
   textAlign(CENTER);
   text(arena.getGuy().getStats(), width / 2, height / 2);
-  image(Title,760,100,250,80);
+  image(Title, 760, 100, 250, 80);
 }
 
-void textBox(){
+void textBox() {
   imageMode(CORNER);
   for (int i=560; i<800; i+=tileSize) {
     for (int j=0; j<tileSize*7; j+=tileSize) {
@@ -161,3 +161,4 @@ void textBox(){
     }
   }
 }  
+

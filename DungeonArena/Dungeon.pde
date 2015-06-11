@@ -5,7 +5,8 @@ class Dungeon {
   protected Adventurer guy;
   protected int rows, cols;
   protected int tileSize;
-  protected PImage W1,W2;
+  protected PImage W1 = loadImage("wall.png");
+  protected PImage W2 = loadImage("floor.png");
 
   Dungeon(int rows, int cols, long seed, int tileSize) {
     this.rows=rows;
@@ -13,8 +14,6 @@ class Dungeon {
     this.tileSize=tileSize;
     generateMap();  
     spawnGuy();
-    W1 = loadImage("wall.png");
-    W2 = loadImage("floor.png");
   }       
 
   void generateMap() {
@@ -23,11 +22,15 @@ class Dungeon {
     for (int i=0; i<map[0].length; i++) {
       for (int j=0; j<map.length; j++) {
         if (i==0||j==0||i==map[0].length-1||j==map.length-1) {
-          map[j][i]=new Tile(0, tileSize,W1,W2);
+          map[j][i]=new Tile(0, tileSize, W1);
           //     map[j][i].setXY(j,i);
         } else {
-          map[j][i]=new Tile(r.nextInt(3), tileSize,W1,W2);
-          // map[j][i].setXY(j,i);
+          if (r.nextInt(3)==0) {
+            map[j][i]=new Tile(0, tileSize, W1);
+          } else {
+            map[j][i]=new Tile(1, tileSize, W2);
+            // map[j][i].setXY(j,i);
+          }
         }
       }
     }
@@ -44,7 +47,7 @@ class Dungeon {
   }
 
   void setupCamera() {
-    Tile temp = new Tile(0, tileSize,W1,W2);
+    Tile temp = new Tile(0, tileSize, W1);
     int cX = guy.getX()-3;
     int cY = guy.getY()-3;
     for (int i=cX; i<cX+7; i++) {
@@ -61,7 +64,8 @@ class Dungeon {
   }
 
   void draw() {
-    setupCamera();/* 
+    setupCamera();
+    /* 
      for (Tile[] e : camera) {
      for (Tile f : e) {
      f.draw();

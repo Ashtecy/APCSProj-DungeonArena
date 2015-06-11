@@ -5,9 +5,9 @@ class Tile {
   protected Random r = new Random();
   protected int tileSize;
   protected ArrayList<Item> drops = new ArrayList<Item>();
-  PImage W;
+  PImage D;
 
-  Tile(int n, int tileSize, PImage W1, PImage W2) {
+  Tile(int n, int tileSize, PImage W) {
     this.tileSize=tileSize;
     isWall=(n==0);
     if (Math.random() < 0.05) {
@@ -16,19 +16,15 @@ class Tile {
     if (Math.random() < 0.1) {
       addDrop(new Equiptment("ASD", (int)(Math.random() * 6), x, y));
     }
-    if (isWall()) {
-      setImage(W1);
-    } else {
-      setImage(W2);
-    }
+    setImage(W);
   }
 
   void setImage(PImage src){
-    W=src;
+    D=src;
   }
 
   PImage getImage() {
-    return W;
+    return D;
   }
 
   void setX (int newX) {
@@ -61,7 +57,7 @@ class Tile {
 
   void draw() {
     imageMode(CORNER);
-    image(W, x*tileSize, y*tileSize, tileSize, tileSize);
+    image(D, x*tileSize, y*tileSize, tileSize, tileSize);
     if (!isWall() && drops.size() > 0) {
       drops.get(drops.size() - 1).setXY(x, y);
       drops.get(drops.size() - 1).draw();
