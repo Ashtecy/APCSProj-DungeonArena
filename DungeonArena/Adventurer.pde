@@ -12,6 +12,8 @@ class Adventurer extends Being {
     inv = new Inventory(16);
     setLVL(1);
     setEXP(0);
+    setHP(500);
+    setMaxHP(500);
     setImage("man.png");
     furySwipes = false;
     magicalStrike = false;

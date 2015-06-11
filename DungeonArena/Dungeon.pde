@@ -14,7 +14,7 @@ class Dungeon {
     monsters = new ArrayList<Creature>();
     generateMap();  
     spawnGuy();
-    while (monsters.size () < 10) {
+    while (monsters.size () < 20) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall() && map[x][y].occupant == null) {
