@@ -53,10 +53,6 @@ abstract class Being extends MapObject {
   void move(int x, int y) {
     setXY(x, y);
   }
-  
-  void draw(){
-    super.draw();
-  }
 
   void attack(Being other) {
     other.setHP((int)(other.getHP() - 1  - Math.random() * 5));
@@ -93,8 +89,8 @@ abstract class Being extends MapObject {
   }
 
   void die() {
-    //drop an item
-      }
+
+}
 
   void drop(Dungeon d, Item drop) {
     getTile(d, getX(), getY()).addDrop(drop);

@@ -19,46 +19,64 @@ class Inventory {
     equiptment = new Stats();
   }
 
-  boolean add (Item i) {
-    if (cap > items.size()) {
+  void add (Item i) {
+    if (items.size() < cap) {
       items.add(i);
-      return true;
-    }    
-    return false;
+    }
   }
 
-  void drop (int inInd) {
-    items.remove(inInd).drop();
+  void drop (int inInd, Tile t, int x, int y) {
+    Item removed = items.remove(inInd);
+    removed.setXY(x, y);
+    removed.drop(t);
   }
 
   void equipt (int ind) {
-    if (items.get(ind) != null && ind < cap) {
+    if (items.get(ind) != null) {
       int temp = items.get(ind).getType();
       switch (temp) {
       case HELM:
+        helm.isEquipped = false;
         helm = (Equiptment)items.get(ind);
         break;
       case CHEST:
+        chest.isEquipped = false;
         chest = (Equiptment)items.get(ind);
         break;
       case ARMS:
+        arms.isEquipped = false;
         arms = (Equiptment)items.get(ind);
         break;
       case LEGS:
+        legs.isEquipped = false;
         legs = (Equiptment)items.get(ind);
         break;
       case WEAPON:
+        weapon.isEquipped = false;
         weapon = (Equiptment)items.get(ind);
         break;
       default:
         break;
       }
+      items.get(ind).isEquipped = true;
     }
   }
 
-  Consumable use(int ind) {
-    if (items.get(ind).getType() == CONSUMABLE) {
-      return (Consumable)items.remove(ind);
+  void use(int ind, Adventurer a) {
+    if (ind >= 0 && ind < items.size()) {
+      if (items.get(ind).getType() == CONSUMABLE) {
+        ((Consumable)(items.remove(ind))).use(a);
+      } else {
+        equipt(ind);
+        a.updateStats();
+      }
+    }
+  }
+
+  Item get(int ind) {
+    if (ind >= 0 && ind < items.size() ) {//&& items.get(ind).getType() == CONSUMABLE) {
+      //return (Consumable)(items.get(ind));
+      return (items.get(ind));
     }
     return null;
   }

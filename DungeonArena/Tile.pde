@@ -5,24 +5,26 @@ class Tile {
   protected Random r = new Random();
   protected int tileSize;
   protected ArrayList<Item> drops = new ArrayList<Item>();
-  PImage W;
+  PImage D;
 
-  Tile(int n, int tileSize) {
+  Tile(int n, int tileSize, PImage W) {
     this.tileSize=tileSize;
     isWall=(n==0);
-    if (isWall()) {
-      setImage("wall.png");
-    } else {
-      setImage("floor.png");
+    if (Math.random() < 0.05) {
+      addDrop(new Consumable(x, y));
     }
+    if (Math.random() < 0.1) {
+      addDrop(new Equiptment("ASD", (int)(Math.random() * 6), x, y));
+    }
+    setImage(W);
   }
 
-  void setImage(String src) {
-    W = loadImage(src);
+  void setImage(PImage src){
+    D=src;
   }
 
   PImage getImage() {
-    return W;
+    return D;
   }
 
   void setX (int newX) {
@@ -46,21 +48,19 @@ class Tile {
     drops.add(i);
   }
 
-  void removeDrop() {
+  Item removeDrop() {
     if (drops.size() > 0) {
-      drops.remove(drops.size() - 1);
+      return drops.remove(drops.size() - 1);
     }
+    return null;
   }
 
   void draw() {
     imageMode(CORNER);
-    if (isWall) {
-      image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
-    } else {
-      image(getImage(), x*tileSize, y*tileSize, tileSize, tileSize);
-      for (Item o : drops) {
-        o.draw();
-      }
+    image(D, x*tileSize, y*tileSize, tileSize, tileSize);
+    if (!isWall() && drops.size() > 0) {
+      drops.get(drops.size() - 1).setXY(x, y);
+      drops.get(drops.size() - 1).draw();
     }
   }
 }

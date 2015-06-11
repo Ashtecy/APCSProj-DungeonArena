@@ -26,3 +26,5 @@ May 31, 2015 Working on interaction between items, beings, and tiles of the dung
 June 2, 2015 Broke movement and camera
 
 June 4, 2015 Fixed movement and camera. player still walks through walls but that will be resolved shortly.
+
+June 4, 2015 Better movement. Added a score screen as well, but it doesn't hold much information.

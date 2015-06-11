@@ -5,7 +5,11 @@ protected long seed;
 protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
+<<<<<<< HEAD
 protected PImage Title, P1, P2, L, S,T;
+=======
+protected PImage Title, P1, P2, L, S, T, W1, W2;
+>>>>>>> rcbranch
 
 void setup() {
   size(960, 800);
@@ -17,7 +21,11 @@ void setup() {
   L = loadImage("loading.png");
   S = loadImage("side.png");
   T = loadImage("text.png");
+<<<<<<< HEAD
   arena = new Dungeon(20, 20, seed, tileSize);
+=======
+  arena = new Dungeon(30, 30, seed, tileSize);
+>>>>>>> rcbranch
   trackInventory = 0;
 }
 
@@ -116,6 +124,7 @@ void sideScreen() {
   for (int i=0; i<800; i+=80) {
     for (int j=560; j<960; j+=80) {
       image(S, j, i, 80, 80);
+<<<<<<< HEAD
     }
   }
   for (int i = 0; i < guy.inv.size (); i++) {
@@ -123,6 +132,15 @@ void sideScreen() {
       fill(120, 120, 120, 120);
       rect(560 + (i % 4) * 100, height / 4 + 100 + (i / 4) * 100, 100, 100);
     }
+=======
+    }
+  }
+  for (int i = 0; i < guy.inv.size (); i++) {
+    if (i == trackInventory) {
+      fill(120, 120, 120, 120);
+      rect(560 + (i % 4) * 100, height / 4 + 100 + (i / 4) * 100, 100, 100);
+    }
+>>>>>>> rcbranch
     if (guy.inv.get(i).isEquipped) {
       fill(200, 200, 100, 120);
       rect(560 + (i % 4) * 100, height / 4 + 100 + (i / 4) * 100, 100, 100);
@@ -150,10 +168,17 @@ void scoreScreen() {
   fill(0, 0, 0);
   textAlign(CENTER);
   text(arena.getGuy().getStats(), width / 2, height / 2);
+<<<<<<< HEAD
   image(Title,760,100,250,80);
 }
 
 void textBox(){
+=======
+  image(Title, 760, 100, 250, 80);
+}
+
+void textBox() {
+>>>>>>> rcbranch
   imageMode(CORNER);
   for (int i=560; i<800; i+=tileSize) {
     for (int j=0; j<tileSize*7; j+=tileSize) {
@@ -161,3 +186,7 @@ void textBox(){
     }
   }
 }  
+<<<<<<< HEAD
+=======
+
+>>>>>>> rcbranch
