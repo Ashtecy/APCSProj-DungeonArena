@@ -178,6 +178,7 @@ class Adventurer extends Being {
 
   void drop(int inInd, Tile t) {
     inv.drop(inInd, t, getX(), getY());
+    updateStats();
   }
 }
 

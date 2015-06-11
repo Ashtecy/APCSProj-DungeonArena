@@ -30,6 +30,17 @@ class Inventory {
       Item removed = items.remove(inInd);
       removed.setXY(x, y);
       removed.drop(t);
+      if (removed.equals(helm)){
+        helm = new Equiptment("Nothing", NAKED, 6, 0);
+      }else if (removed.equals(chest)){
+        chest =new Equiptment("Nothing", NAKED, 6, 0);
+      }else if (removed.equals(arms)){
+        arms = new Equiptment("Nothing", NAKED, 6, 0);
+      }else if (removed.equals(legs)){
+        legs = new Equiptment("Nothing", NAKED, 6, 0);
+      }else if (removed.equals(weapon)){
+        weapon = new Equiptment("Nothing", NAKED, 6, 0);
+      }
     }
   }
 
