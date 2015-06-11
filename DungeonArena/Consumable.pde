@@ -6,7 +6,9 @@ class Consumable extends Item {
   }
 
   void use(Adventurer b) {
-    b.setHP(b.getHP() + (int)(Math.random() * (b.getMaxHP() - b.getHP())));
+    if (b.getHP() < b.getMaxHP()) {
+      b.setHP(b.getHP() + 1 + (int)(Math.random() * (b.getMaxHP() - 1 - b.getHP())));
+    }
     if (Math.random() < 0.1) {
       b.setSTR(b.getSTR() + 1);
     }

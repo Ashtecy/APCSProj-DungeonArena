@@ -11,7 +11,7 @@ class Tile {
   Tile(int n, int tileSize, PImage W) {
     this.tileSize=tileSize;
     isWall=(n==0);
-    if (Math.random() < 0.05) {
+    if (Math.random() < 0.9) {
       addDrop(new Consumable(x, y));
     }
     if (Math.random() < 0.02) {

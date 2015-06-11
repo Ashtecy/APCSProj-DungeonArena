@@ -5,7 +5,7 @@ protected long seed;
 protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
-protected PImage Title, P1, P2, L, S,T;
+protected PImage Title, P1, P2, L, S, T;
 
 void setup() {
   size(960, 800);
@@ -17,7 +17,7 @@ void setup() {
   L = loadImage("loading.png");
   S = loadImage("side.png");
   T = loadImage("text.png");
-  arena = new Dungeon(30, 30, seed, tileSize);
+  arena = new Dungeon(20, 20, seed, tileSize);
   trackInventory = 0;
 }
 
@@ -69,6 +69,18 @@ void keyPressed() {
     }
     if (keyCode == 68) { //d to drop
       guy.drop(trackInventory, arena.getTile(guy.getX(), guy.getY()));
+    }
+    if (keyCode == 90) {// z
+      guy.queueFurySwipes();
+    }
+    if (keyCode == 88) {// x 
+      guy.queueMagicalStrike();
+    }
+    if (keyCode == 67) {// c 
+      guy.queueShield();
+    }
+    if (keyCode == 86) {// v 
+      guy.queueSweepingStrike();
     }
     if (keyCode==97) {
       if (arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() != null) {
@@ -123,10 +135,10 @@ void keyPressed() {
     if (guy.getHP() <= 0) {
       MODE = 2;
     }
-  }else if (MODE == 2){
-   if (keyCode == 32){
-    setup();
-   } 
+  } else if (MODE == 2) {
+    if (keyCode == 32) {
+      setup();
+    }
   }
 }
 
@@ -147,13 +159,32 @@ void sideScreen() {
   for (int i = 0; i < guy.inv.size (); i++) {
     if (i == trackInventory) {
       fill(120, 120, 120, 120);
-      rect(560 + (i % 4) * 100, height / 4 + 100 + (i / 4) * 100, 100, 100);
+      rect(560 + (i % 4) * 100, height / 4 + 200 + (i / 4) * 100, 100, 100);
     }
     if (guy.inv.get(i).isEquipped) {
       fill(200, 200, 100, 120);
-      rect(560 + (i % 4) * 100, height / 4 + 100 + (i / 4) * 100, 100, 100);
+      rect(560 + (i % 4) * 100, height / 4 + 200 + (i / 4) * 100, 100, 100);
     }
-    image(guy.inv.get(i).getImage(), 560 + (i % 4) * 100, height / 4 + 100 + (i / 4) * 100, 100, 100);
+    image(guy.inv.get(i).getImage(), 560 + (i % 4) * 100, height / 4 + 200 + (i / 4) * 100, 100, 100);
+  }
+  textAlign(LEFT);
+  fill(255);
+  text("z", 560, height / 4 + 120);
+  text("x", 660, height / 4 + 120);
+  text("c", 760, height / 4 + 120);
+  text("v", 860, height / 4 + 120);
+  fill(50, 50, 50);
+  if (guy.furySwipes) {
+    rect(560, height / 4 + 100, 100, 100);
+  }
+  if (guy.magicalStrike) {
+    rect(660, height / 4 + 100, 100, 100);
+  }
+  if (guy.shield) {
+    rect(760, height / 4 + 100, 100, 100);
+  }
+  if (guy.sweepingStrike) {
+    rect(860, height / 4 + 100, 100, 100);
   }
   fill(255);
   textSize(18);
@@ -185,7 +216,7 @@ void scoreScreen() {
   text("Press SPACEBAR to start a new game", width / 2, height / 2 + 120);
 }
 
-void textBox(){
+void textBox() {
   imageMode(CORNER);
   for (int i=560; i<800; i+=tileSize) {
     for (int j=0; j<tileSize*7; j+=tileSize) {
