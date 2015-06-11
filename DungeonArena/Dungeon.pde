@@ -75,15 +75,12 @@ class Dungeon {
 
   void draw() {
     setupCamera();
-<<<<<<< HEAD
     /* 
      for (Tile[] e : camera) {
      for (Tile f : e) {
      f.draw();
      }
      }*/
-=======
->>>>>>> 00fc06b8ed88df34979250d2675752aea77dfb8e
     guy.draw();
   }
 
