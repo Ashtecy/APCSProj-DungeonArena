@@ -5,11 +5,12 @@ class Equiptment extends Item {
   Equiptment(String name, int setType, int xi, int yi) {
     super("Equiptment", setType, xi, yi);
     stats = new Stats();
-    setSTR((int)(Math.random() * 5));
-    setDEX((int)(Math.random() * 5));
-    setINT((int)(Math.random() * 5));
+    if (setType != 6) {
+      setSTR((int)(Math.random() * 5));
+      setDEX((int)(Math.random() * 5));
+      setINT((int)(Math.random() * 5));
+    }
   }
-  
 
   int getSTR() {
     return stats.getSTR();
@@ -40,6 +41,5 @@ class Equiptment extends Item {
     base.setDEX(base.getDEX() + stats.getDEX());
     base.setINT(base.getINT() + stats.getINT());
   }
-
 }
 

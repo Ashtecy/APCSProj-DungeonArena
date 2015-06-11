@@ -18,10 +18,10 @@ class MapObject {
   int getY () {
     return y;
   }
-   
-   String setName(){
-    return name; 
-   }
+
+  String setName() {
+    return name;
+  }
 
   void setX (int newX) {
     if (newX > 0 && newX < cols*tileSize) {
@@ -51,6 +51,11 @@ class MapObject {
   void draw() {
     imageMode(CENTER);
     image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
+  }
+
+  void draw(int xi, int yi) {
+    imageMode(CENTER);
+    image(W, tileSize*xi+tileSize/2, tileSize*yi+tileSize/2, 0.75*tileSize, 0.75*tileSize);
   }
 }
 

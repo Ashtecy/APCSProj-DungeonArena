@@ -3,6 +3,7 @@ class Dungeon {
   protected Tile[][] camera = new Tile[7][7];
   protected Tile[][] map;
   protected Adventurer guy;
+  protected ArrayList<Creature> monsters;
   protected int rows, cols;
   protected int tileSize;
   protected PImage W1 = loadImage("wall.png");
@@ -12,8 +13,17 @@ class Dungeon {
     this.rows=rows;
     this.cols=cols;
     this.tileSize=tileSize;
+    monsters = new ArrayList<Creature>();
     generateMap();  
     spawnGuy();
+    while (monsters.size () < 5) {
+      int x=r.nextInt(rows-1)+1;
+      int y=r.nextInt(cols-1)+1;
+      if (!map[x][y].isWall() && map[x][y].occupant == null) {
+        map[x][y].setOccupant(new Creature("Creature", 1, x, y));
+        monsters.add((Creature)map[x][y].occupant());
+      }
+    }
   }       
 
   void generateMap() {
@@ -65,12 +75,15 @@ class Dungeon {
 
   void draw() {
     setupCamera();
+<<<<<<< HEAD
     /* 
      for (Tile[] e : camera) {
      for (Tile f : e) {
      f.draw();
      }
      }*/
+=======
+>>>>>>> 00fc06b8ed88df34979250d2675752aea77dfb8e
     guy.draw();
   }
 
@@ -84,6 +97,24 @@ class Dungeon {
 
   Tile getTile(int xpos, int ypos) {
     return map[xpos][ypos];
+  }
+
+  int getHeight() {
+    return map.length;
+  }
+
+  int getWidth() {
+    return map[0].length;
+  }
+
+  void creatureMove() {
+    for (Creature c : monsters) {
+      c.act(this);
+    }
+  }
+  
+  ArrayList<Creature> getMonsters(){
+   return monsters; 
   }
 }
 
