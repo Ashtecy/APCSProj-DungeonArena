@@ -17,7 +17,7 @@ void setup() {
   L = loadImage("loading.png");
   S = loadImage("side.png");
   T = loadImage("text.png");
-  arena = new Dungeon(30, 30, seed, tileSize);
+  arena = new Dungeon(20, 20, seed, tileSize);
   trackInventory = 0;
 }
 
@@ -70,8 +70,17 @@ void keyPressed() {
     if (keyCode == 68) { //d to drop
       guy.drop(trackInventory, arena.getTile(guy.getX(), guy.getY()));
     }
-    if (keyCode == 90) {
-      guy.spinSlash(arena);
+    if (keyCode == 90) {// z
+      guy.queueFurySwipes();
+    }
+    if (keyCode == 88){// x 
+      guy.queueMagicalStrike();
+    }
+    if (keyCode == 67){// c 
+      guy.queueShield();
+    }
+    if (keyCode == 86){// v 
+      guy.queueSweepingStrike();
     }
     if (keyCode==97) {
       if (arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() != null) {

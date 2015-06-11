@@ -3,6 +3,7 @@ class Adventurer extends Being {
   private int LVL, MP, EXP, PTS;
   protected Inventory inv;// = new Inventory(20);
   private Stats stats, equiptment;
+  protected boolean furySwipes, magicalStrike, shield, sweepingStrike;
 
   Adventurer(String name, int x, int y, int str, int dex, int in) {
     super(name, x, y);
@@ -12,6 +13,10 @@ class Adventurer extends Being {
     setLVL(1);
     setEXP(0);
     setImage("man.png");
+    furySwipes = false;
+    magicalStrike = false;
+    shield = false;
+    sweepingStrike = false;
   }
 
   Adventurer(String name, int x, int y) {
@@ -67,6 +72,14 @@ class Adventurer extends Being {
     LVL = l;
   }
 
+  void setHP(int newHP) {
+    if (!shield) {
+      super.setHP(newHP);
+    } else {
+      shield = false;
+    }
+  }
+
   void setEXP(int e) {
     EXP = e;
   }
@@ -82,12 +95,62 @@ class Adventurer extends Being {
   }
 
   void attack(Dungeon d, Being other) {
-    if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
+    if (furySwipes) {
+      furySwipes(d, other);
+    } else if (magicalStrike) {
+      magicalStrike(d, other);
+    } else if (sweepingStrike) {
+      sweepingStrike(d);
+    } else if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
       other.setHP(other.getHP() - getSTR());
-      if (other.getHP() <= 0) {
-        other.die(d);
+    }
+    if (other.getHP() <= 0) {
+      other.die(d);
+    }
+  }
+
+  void queueShield() {
+    shield = true;
+  }
+
+  void furySwipes(Dungeon d, Being other) {
+    do {
+      furySwipes = false;
+      attack(d, other);
+    } 
+    while (Math.random () < getINT() / 50.0);
+  }
+
+  void queueFurySwipes() {
+    furySwipes = true;
+  }
+
+  void magicalStrike(Dungeon d, Being other) {
+    magicalStrike = false;
+    setSTR(getSTR() + getINT());
+    attack(d, other);
+    setSTR(getSTR() - getINT());
+  }
+
+  void queueMagicalStrike() {
+    magicalStrike = true;
+  }
+
+  void sweepingStrike(Dungeon d) {
+    sweepingStrike = false;
+    for (int r = -1; r < 2; r++) {
+      if (getY() + r >= 0 && getY() + r < d.getWidth()) {
+        for (int c = -1; c < 2; c++) {
+          if (getX() + c >= 0 && getX() + c < d.getHeight() && d.getTile(getX() + r, getY() + c).occupant() != null) {
+            attack(d, d.getTile(getX() + r, getY() + c).occupant());
+          }
+        }
       }
     }
+  }
+
+  void queueSweepingStrike() {
+    sweepingStrike = true;
   }
 
   void pickUp(Item it) {
@@ -114,20 +177,5 @@ class Adventurer extends Being {
   void drop(int inInd, Tile t) {
     inv.drop(inInd, t, getX(), getY());
   }
-
-  void spinSlash(Dungeon d) {
-    for (int r = 2; r < 4; r++) {
-      for (int c = 2; c < 4; c++) {
-        if (d.getCamera()[r][c].occupant() != null) {
-          attack(d, d.getCamera()[r][c].occupant());
-        }
-      }
-    }
-  }
-  /*
-  void doubleSlash(Dungeon d, Being other) {
-   attack(d, other);
-   attack(d, other);
-   }*/
 }
 
