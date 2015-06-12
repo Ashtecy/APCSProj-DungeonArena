@@ -3,6 +3,7 @@ class Dungeon {
   protected Tile[][] camera = new Tile[7][7];
   protected Tile[][] map;
   protected Adventurer guy;
+  protected Nemesis Al;
   protected ArrayList<Creature> monsters;
   protected int rows, cols;
   protected int tileSize;
@@ -15,7 +16,7 @@ class Dungeon {
     this.tileSize=tileSize;
     monsters = new ArrayList<Creature>();
     generateMap();  
-    spawnGuy();
+    spawn();
     while (monsters.size () < 5) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
@@ -46,15 +47,36 @@ class Dungeon {
     }
   }
 
-  void spawnGuy() {
+  void spawn() {
     while (guy==null) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
-      if (!map[x][y].isWall()) {
+      if (!map[x][y].isWall() && !isTrapped(x,y)) {
         guy = new Adventurer("Guy", x, y);
       }
     }
+    while (Al==null) {
+      int x=r.nextInt(rows-1)+1;
+      int y=r.nextInt(cols-1)+1;
+      if (!map[x][y].isWall() && !isTrapped(x,y)) {
+        Al = new Nemesis(0, x, y);
+      }
+    }
   }
+  
+  boolean isTrapped(int x, int y){
+    int count = 8;
+    for(int i=x-1;i<=x+1;i++){
+      for(int j=y-1;j<=j+1;j++){
+        if(map[x][y].isWall()){
+          count--;
+        }
+      }
+    }
+    return count==0;
+  }
+          
+        
 
   void setupCamera() {
     Tile temp = new Tile(0, tileSize, W1);
@@ -108,6 +130,7 @@ class Dungeon {
     for (Creature c : monsters) {
       c.act(this);
     }
+    Al.act(this);
   }
   
   ArrayList<Creature> getMonsters(){
