@@ -50,11 +50,11 @@ void keyPressed() {
       seed=System.currentTimeMillis();
       MODE=0;
     }
-    if (keyCode==32) {
+    if (keyCode==32) {//spacebar
       int x = guy.getX();
       int y = guy.getY();
       Item topDrop = arena.getTile(x, y).removeDrop();
-      if (topDrop != null) {
+      if (topDrop != null  && guy.inv.size() < guy.inv.getCap()) {
         guy.pickUp(topDrop);
       }
     }
@@ -169,10 +169,10 @@ void sideScreen() {
   }
   textAlign(LEFT);
   fill(255);
-  text("z", 560, height / 4 + 120);
-  text("x", 660, height / 4 + 120);
-  text("c", 760, height / 4 + 120);
-  text("v", 860, height / 4 + 120);
+  text("z \n10 MP", 560, height / 4 + 120);
+  text("x \n10 MP", 660, height / 4 + 120);
+  text("c \n10 MP", 760, height / 4 + 120);
+  text("v \n10 MP", 860, height / 4 + 120);
   fill(50, 50, 50);
   if (guy.furySwipes) {
     rect(560, height / 4 + 100, 100, 100);
@@ -191,7 +191,7 @@ void sideScreen() {
   textAlign(LEFT);
   image(guy.getImage(), 560, height / 4, 100, 100);
   text(guy.getName() + " the Adventurer", 660, height / 4); 
-  text(guy.getHP() + " / " + guy.getMaxHP() + " HP", 660, height / 4 + 20); 
+  text(guy.getHP() + " / " + guy.getMaxHP() + " HP, " + guy.getMP() + " / " + guy.getMaxMP() + " MP", 660, height / 4 + 20); 
   text(guy.getSTR() + "STR", 660, height / 4 + 40);  
   text(guy.getDEX() + "DEX", 660, height / 4 + 60);  
   text(guy.getINT() + "INT", 660, height / 4 + 80);  
@@ -207,12 +207,12 @@ void scoreScreen() {
   textSize(20);
   fill(0, 0, 0);
   textAlign(CENTER);
-  image(Title,760,100,250,80);
+  image(Title, 760, 100, 250, 80);
   text(arena.getGuy().getName() + " the Adventurer, may he rest in pieces", width / 2, height / 2 + 20); 
   text(arena.getGuy().getHP() + " / " + arena.getGuy().getMaxHP() + " HP", width / 2, height / 2 + 40); 
-  text(arena.getGuy().getSTR() + "STR", width / 2, height / 2 + 60);  
-  text(arena.getGuy().getDEX() + "DEX", width / 2, height / 2 + 80);  
-  text(arena.getGuy().getINT() + "INT", width / 2, height / 2 + 100); 
+  text(arena.getGuy().getSTR() + " STR", width / 2, height / 2 + 60);  
+  text(arena.getGuy().getDEX() + " DEX", width / 2, height / 2 + 80);  
+  text(arena.getGuy().getINT() + " INT", width / 2, height / 2 + 100); 
   text("Press SPACEBAR to start a new game", width / 2, height / 2 + 120);
 }
 

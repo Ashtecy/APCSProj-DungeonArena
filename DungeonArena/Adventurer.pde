@@ -1,28 +1,37 @@
 class Adventurer extends Being {
 
-  private int LVL, MP, EXP, PTS;
+  private int LVL, MP, maxMP, EXP, PTS, steps;
   protected Inventory inv;// = new Inventory(20);
   private Stats stats, equiptment;
   protected boolean furySwipes, magicalStrike, shield, sweepingStrike;
+  protected PImage[] slash;
 
-  Adventurer(String name, int x, int y, int str, int dex, int in) {
+  Adventurer(String name, int x, int y, int level) {
     super(name, x, y);
-    stats = new Stats(str, dex, in);
+    stats = new Stats(10 + level, 10 + level, 10 + level);
     equiptment = new Stats(0, 0, 0);
     inv = new Inventory(16);
-    setLVL(1);
+    setLVL(level);
     setEXP(0);
-    setHP(500);
-    setMaxHP(500);
+    setHP(45 + 5 * level);
+    setMP(18 + 2 * level);
+    setMaxHP(getHP());
+    setMaxMP(getMP());
     setImage("man.png");
-    furySwipes = false;
+    steps = 0;
+    /*
+    slash = new PImage[4];
+     slash[0] = loadImage("slashQ1.png");
+     slash[1] = loadImage("slashQ2.png");
+     slash[2] = loadImage("slashQ3.png");
+     slash[3] = loadImage("slashQ4.png");*/
     magicalStrike = false;
     shield = false;
     sweepingStrike = false;
   }
 
   Adventurer(String name, int x, int y) {
-    this(name, x, y, 10, 10, 10);
+    this(name, x, y, 1);
   }
 
   void draw() {
@@ -54,6 +63,10 @@ class Adventurer extends Being {
     return MP;
   }
 
+  int getMaxMP() {
+    return maxMP;
+  }
+
   void setSTR(int s) {
     stats.setSTR(s);
   }
@@ -68,6 +81,10 @@ class Adventurer extends Being {
 
   void setMP(int m) {
     MP = m;
+  }
+
+  void setMaxMP(int m) {
+    maxMP = m;
   }
 
   void setLVL(int l) {
@@ -105,6 +122,7 @@ class Adventurer extends Being {
       sweepingStrike(d);
     } else if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
       other.setHP(other.getHP() - getSTR());
+    //  imageMode(CENTER);
     }
     if (other.getHP() <= 0) {
       other.die(d);
@@ -112,7 +130,10 @@ class Adventurer extends Being {
   }
 
   void queueShield() {
-    shield = true;
+    if (getMP() >= 10) {
+      shield = true;
+      setMP(getMP() - 10);
+    }
   }
 
   void furySwipes(Dungeon d, Being other) {
@@ -124,7 +145,10 @@ class Adventurer extends Being {
   }
 
   void queueFurySwipes() {
-    furySwipes = true;
+    if (getMP() >= 10  && !(sweepingStrike || magicalStrike)) {
+      furySwipes = true;
+      setMP(getMP() - 10);
+    }
   }
 
   void magicalStrike(Dungeon d, Being other) {
@@ -135,7 +159,10 @@ class Adventurer extends Being {
   }
 
   void queueMagicalStrike() {
-    magicalStrike = true;
+    if (getMP() >= 10 && !(furySwipes || sweepingStrike)) {
+      magicalStrike = true;
+      setMP(getMP() - 10);
+    }
   }
 
   void sweepingStrike(Dungeon d) {
@@ -152,7 +179,10 @@ class Adventurer extends Being {
   }
 
   void queueSweepingStrike() {
-    sweepingStrike = true;
+    if (getMP() >= 15 && !(furySwipes || magicalStrike)) {
+      sweepingStrike = true;
+      setMP(getMP() - 15);
+    }
   }
 
   void pickUp(Item it) {
@@ -179,6 +209,19 @@ class Adventurer extends Being {
   void drop(int inInd, Tile t) {
     inv.drop(inInd, t, getX(), getY());
     updateStats();
+  }
+
+  void setXY(int x, int y) {
+    super.setXY(x, y);
+    steps++;
+    if (steps % 5 == 0) {
+      if (getHP() < getMaxHP()) {
+        setHP(getHP() + 1);
+      }
+      if (getMP() < getMaxMP()) {
+        setMP(getMP() + 1);
+      }
+    }
   }
 }
 

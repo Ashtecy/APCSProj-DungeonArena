@@ -8,7 +8,6 @@ class MapObject {
   MapObject(String name, int x, int y) {
     setXY(x, y);
     this.name = name;
-    setImage("mace.png");
   }
 
   int getX () {

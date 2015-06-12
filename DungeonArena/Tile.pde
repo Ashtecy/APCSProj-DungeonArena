@@ -11,7 +11,7 @@ class Tile {
   Tile(int n, int tileSize, PImage W) {
     this.tileSize=tileSize;
     isWall=(n==0);
-    if (Math.random() < 0.9) {
+    if (Math.random() < 0.1) {
       addDrop(new Consumable(x, y));
     }
     if (Math.random() < 0.02) {
@@ -20,7 +20,7 @@ class Tile {
     setImage(W);
   }
 
-  void setImage(PImage src){
+  void setImage(PImage src) {
     D=src;
   }
 
@@ -56,6 +56,13 @@ class Tile {
   Item removeDrop() {
     if (drops.size() > 0) {
       return drops.remove(drops.size() - 1);
+    }
+    return null;
+  }
+
+  Item getDrop() {
+    if (drops.size() > 0) {
+      return drops.get(drops.size() - 1);
     }
     return null;
   }
