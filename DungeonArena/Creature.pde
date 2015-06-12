@@ -11,7 +11,5 @@ class Creature extends Being {
     }
   }
   
-  
-  
 }
 

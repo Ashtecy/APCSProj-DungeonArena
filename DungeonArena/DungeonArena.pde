@@ -190,9 +190,9 @@ void sideScreen() {
   textSize(18);
   textAlign(LEFT);
   image(guy.getImage(), 560, height / 4, 100, 100);
-  text(guy.getName() + " the Adventurer", 660, height / 4); 
+  text(guy.getName() + " the Level " + guy.getLVL() + " Adventurer", 660, height / 4); 
   text(guy.getHP() + " / " + guy.getMaxHP() + " HP, " + guy.getMP() + " / " + guy.getMaxMP() + " MP", 660, height / 4 + 20); 
-  text(guy.getSTR() + "STR", 660, height / 4 + 40);  
+  text(guy.getSTR() + "STR, " + guy.getEXP() + " / " + guy.getMaxEXP() + " EXP" , 660, height / 4 + 40);  
   text(guy.getDEX() + "DEX", 660, height / 4 + 60);  
   text(guy.getINT() + "INT", 660, height / 4 + 80);  
   imageMode(CENTER);
