@@ -1,6 +1,6 @@
 class Adventurer extends Being {
 
-  private int LVL, MP, maxMP, EXP, PTS, steps;
+  private int LVL, MP, maxMP, EXP, maxEXP, PTS, steps;
   protected Inventory inv;// = new Inventory(20);
   private Stats stats, equiptment;
   protected boolean furySwipes, magicalStrike, shield, sweepingStrike;
@@ -15,8 +15,10 @@ class Adventurer extends Being {
     setEXP(0);
     setHP(45 + 5 * level);
     setMP(18 + 2 * level);
+    setEXP(0);
     setMaxHP(getHP());
     setMaxMP(getMP());
+    setMaxEXP(40);
     steps = 0;
     /*
     slash = new PImage[4];
@@ -54,6 +56,10 @@ class Adventurer extends Being {
     return EXP;
   }
 
+  int getMaxEXP() {
+    return maxEXP;
+  }
+
   int getPTS() {
     return PTS;
   }
@@ -64,6 +70,10 @@ class Adventurer extends Being {
 
   int getMaxMP() {
     return maxMP;
+  }
+
+  int getLVL() {
+    return LVL;
   }
 
   void setSTR(int s) {
@@ -102,14 +112,25 @@ class Adventurer extends Being {
     EXP = e;
   }
 
+  void setMaxEXP(int e) {
+    maxEXP =  e;
+  }
+
   void setPTS(int p) {
     PTS = p;
   }
 
   void levelUp() {
     LVL++;
-    EXP = 0;
-    PTS = 3;
+    setSTR(getSTR() + 2);
+    setDEX(getDEX() + 2);
+    setINT(getINT() + 2);
+    setMaxHP(getMaxHP() + 5);
+    setHP(getMaxHP());
+    setMaxMP(getMaxMP());
+    setMP(getMaxMP());
+    setEXP(getEXP() % getMaxEXP());
+    setMaxEXP((int)((float)getMaxEXP() * 1.4));
   }
 
   void attack(Dungeon d, Being other) {
@@ -125,6 +146,10 @@ class Adventurer extends Being {
     }
     if (other.getHP() <= 0) {
       other.die(d);
+      setEXP(getEXP() + 20);
+      if (getEXP() >= getMaxEXP()){
+       levelUp(); 
+      }
     }
   }
 
