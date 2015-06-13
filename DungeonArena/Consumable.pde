@@ -1,10 +1,9 @@
 class Consumable extends Item {
 
-  Consumable(int xi, int yi) {
-    super("Potion", 0, xi, yi);
-    setImage("potion.png");
+  Consumable(int xi, int yi, PImage[] i) {
+    super("Potion", 0, xi, yi, i);
   }
-
+  
   void use(Adventurer b) {
     if (b.getHP() < b.getMaxHP()) {
       b.setHP(b.getHP() + 1 + (int)(Math.random() * (b.getMaxHP() - 1 - b.getHP())));

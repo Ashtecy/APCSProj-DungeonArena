@@ -6,6 +6,7 @@ protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
 protected PImage Title, P1, P2, L, S, T;
+protected DialogueBox dialogue;
 
 void setup() {
   size(960, 800);
@@ -19,6 +20,7 @@ void setup() {
   T = loadImage("text.png");
   arena = new Dungeon(20, 20, seed, tileSize);
   trackInventory = 0;
+  dialogue = new DialogueBox();
 }
 
 void draw() {
@@ -223,5 +225,9 @@ void textBox() {
       image(T, j, i, tileSize, tileSize);
     }
   }
+  textAlign(LEFT);
+  fill(0);
+  textSize(24);
+  text(dialogue.toString(), 0, 600);
 }  
 

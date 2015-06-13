@@ -4,32 +4,10 @@ class Item extends MapObject {
   protected int type;
   boolean isEquipped;
 
-  Item(String name, int setType, int xi, int yi) {
-    super(name, xi, yi);
+  Item(String name, int setType, int xi, int yi, PImage[] itemImage) {
+    super(name, xi, yi, itemImage[setType]);
     type = setType;
     stored = false;
-    switch (setType) {
-    case 0:
-      setImage("potion.png");
-      break;
-    case 1:
-      setImage("helm.png");
-      break;
-    case 2:
-      setImage("chest.png");
-      break;
-    case 3:
-      setImage("arms.png");
-      break;
-    case 4:
-      setImage("legs.png");
-      break;
-    case 5:
-      setImage("weapon.png");
-      break;
-    default:
-      break;
-    }
     isEquipped = false;
   }
 

@@ -6,18 +6,17 @@ class Adventurer extends Being {
   protected boolean furySwipes, magicalStrike, shield, sweepingStrike;
   protected PImage[] slash;
 
-  Adventurer(String name, int x, int y, int level) {
-    super(name, x, y);
+  Adventurer(String name, int x, int y, int level, PImage i, PImage[] imgs) {
+    super(name, x, y, i, imgs);
     stats = new Stats(10 + level, 10 + level, 10 + level);
     equiptment = new Stats(0, 0, 0);
-    inv = new Inventory(16);
+    inv = new Inventory(16, imgs);
     setLVL(level);
     setEXP(0);
     setHP(45 + 5 * level);
     setMP(18 + 2 * level);
     setMaxHP(getHP());
     setMaxMP(getMP());
-    setImage("man.png");
     steps = 0;
     /*
     slash = new PImage[4];
@@ -30,8 +29,8 @@ class Adventurer extends Being {
     sweepingStrike = false;
   }
 
-  Adventurer(String name, int x, int y) {
-    this(name, x, y, 1);
+  Adventurer(String name, int x, int y, PImage i, PImage[] imgs) {
+    this(name, x, y, 1, i, imgs);
   }
 
   void draw() {
@@ -122,7 +121,7 @@ class Adventurer extends Being {
       sweepingStrike(d);
     } else if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
       other.setHP(other.getHP() - getSTR());
-    //  imageMode(CENTER);
+      //  imageMode(CENTER);
     }
     if (other.getHP() <= 0) {
       other.die(d);

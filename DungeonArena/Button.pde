@@ -1,4 +1,3 @@
-
 class Button{
   
   protected float x,y,w,h;

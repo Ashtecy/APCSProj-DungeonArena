@@ -10,6 +10,12 @@ class MapObject {
     this.name = name;
   }
 
+  MapObject(String name, int x, int y, PImage i) {
+    setXY(x, y);
+    setImage(i);
+    this.name = name;
+  }
+
   int getX () {
     return x;
   }
@@ -37,6 +43,10 @@ class MapObject {
   void setXY (int newX, int newY) {
     setX(newX);
     setY(newY);
+  }
+
+  void setImage(PImage i) {
+    W = i;
   }
 
   void setImage(String src) {

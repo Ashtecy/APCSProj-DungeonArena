@@ -1,8 +1,7 @@
 class Creature extends Being {
 
-  Creature(String name, int level, int x, int y) {
-    super(name, x, y);
-    setImage("creature.png");
+  Creature(String name, int level, int x, int y, PImage i, PImage[] imgs) {
+    super(name, x, y, i, imgs);
   }
 
   void attack(Being other) {
@@ -10,8 +9,6 @@ class Creature extends Being {
       other.setHP((int)(other.getHP() - 1  - Math.random() * 3));
     }
   }
-  
-  
   
 }
 
