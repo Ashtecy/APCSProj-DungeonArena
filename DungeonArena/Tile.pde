@@ -11,7 +11,6 @@ class Tile {
   Tile(int n, int tileSize, PImage W) {
     this.tileSize=tileSize;
     isWall=(n==0);
-
     setImage(W);
   }
 

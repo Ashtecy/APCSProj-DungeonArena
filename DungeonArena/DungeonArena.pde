@@ -64,8 +64,9 @@ void keyPressed() {
       Item topDrop = arena.getTile(x, y).removeDrop();
       if (topDrop != null  && guy.inv.size() < guy.inv.getCap()) {
         guy.pickUp(topDrop);
-      }else{
-       arena.getTile(x,y).addDrop(topDrop); 
+        if (guy.inv.size() >= guy.inv.getCap()){
+                 arena.getTile(x,y).addDrop(topDrop); 
+        }
       }
     }
     if (keyCode == 81 && trackInventory > 0) {//scrolling through inventory < q
