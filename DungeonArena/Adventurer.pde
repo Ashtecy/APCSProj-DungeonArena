@@ -5,6 +5,7 @@ class Adventurer extends Being {
   private Stats stats, equiptment;
   protected boolean furySwipes, magicalStrike, shield, sweepingStrike;
   protected PImage[] slash;
+  protected DialogueBox log;
 
   Adventurer(String name, int x, int y, int level, PImage i, PImage[] imgs) {
     super(name, x, y, i, imgs);
@@ -116,7 +117,11 @@ class Adventurer extends Being {
   void setHP(int newHP) {
     if (!shield) {
       super.setHP(newHP);
+      if (log != null) {
+        log.add("You now have " + getHP() + " HP.");
+      }
     } else {
+      log.add("You are shielded and block an attack!");
       shield = false;
     }
   }
@@ -133,7 +138,8 @@ class Adventurer extends Being {
     PTS = p;
   }
 
-  void levelUp() {
+  void levelUp() {        
+    log.add("You have leveled up! Your stats increase and status resets.");
     LVL++;
     setSTR(getSTR() + 2);
     setDEX(getDEX() + 2);
@@ -146,15 +152,25 @@ class Adventurer extends Being {
     setMaxEXP((int)((float)getMaxEXP() * 1.4));
   }
 
+  void setLog(DialogueBox d) {
+    log = d;
+  }
+
   void attack(Dungeon d, Being other) {
     if (furySwipes) {
       furySwipes(d, other);
+      log.add("You perform sweeping fury swipes.");
     } else if (magicalStrike) {
       magicalStrike(d, other);
+      log.add("You perform magical strike");
     } else if (sweepingStrike) {
+      log.add("You perform sweeping strike");
       sweepingStrike(d);
     } else if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
       other.setHP(other.getHP() - getSTR());
+      log.add("You attacked the enemy for " + getSTR() + " damage.");
+    } else {
+      log.add("You missed your attack!");
     }
     if (other.getHP() <= 0) {
       other.die(d);
@@ -166,18 +182,19 @@ class Adventurer extends Being {
   }
 
   void queueShield() {
-    if (getMP() >= 10) {
-      shield = true;
-      setMP(getMP() - 10);
+    if (!shield) {
+      if (getMP() >= 10) {
+        shield = true;
+        setMP(getMP() - 10);
+      }
     }
   }
 
   void furySwipes(Dungeon d, Being other) {
-    do {
-      furySwipes = false;
+    furySwipes = false;
+    for (int i = 0; i < 6; i++) {
       attack(d, other);
-    } 
-    while (Math.random () < getINT() / 50.0);
+    }
   }
 
   void queueFurySwipes() {
@@ -241,10 +258,12 @@ class Adventurer extends Being {
     inv.getArms().applyBuffs(equiptment);
     inv.getChest().applyBuffs(equiptment);
     inv.getWeapon().applyBuffs(equiptment);
+    log.add("You changed equiptment!");
   }
 
   void drop(int inInd, Tile t) {
     inv.drop(inInd, t, getX(), getY());
+    log.add("You dropped an item!");
     updateStats();
   }
 

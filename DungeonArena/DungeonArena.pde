@@ -26,6 +26,7 @@ void setup() {
   arena = new Dungeon(20, 20, seed, tileSize);
   trackInventory = 0;
   dialogue = new DialogueBox();
+  arena.getGuy().setLog(dialogue);
 }
 
 void draw() {
@@ -63,6 +64,8 @@ void keyPressed() {
       Item topDrop = arena.getTile(x, y).removeDrop();
       if (topDrop != null  && guy.inv.size() < guy.inv.getCap()) {
         guy.pickUp(topDrop);
+      }else{
+       arena.getTile(x,y).addDrop(topDrop); 
       }
     }
     if (keyCode == 81 && trackInventory > 0) {//scrolling through inventory < q
