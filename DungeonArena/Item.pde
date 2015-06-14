@@ -18,6 +18,7 @@ class Item extends MapObject {
   void drop(Tile t) {
     t.addDrop(this);
     stored = false;
+    isEquipped = false;
   }
 
   int getType() {

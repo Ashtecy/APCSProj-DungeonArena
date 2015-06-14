@@ -5,12 +5,13 @@ protected long seed;
 protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
-protected PImage Title, P1, P2, L, S, T;
+protected PImage Title, P1, P2, L, S, T, FurySwipesIcon, MagicalStrikeIcon, ShieldIcon, SweepingStrikeIcon;
 protected DialogueBox dialogue;
 
 void setup() {
   size(960, 800);
   background(255);
+  frameRate(60);
   MODE=0;
   Title = loadImage("Title.png");
   P1 = loadImage("play1.png");
@@ -18,6 +19,10 @@ void setup() {
   L = loadImage("loading.png");
   S = loadImage("side.png");
   T = loadImage("text.png");
+  FurySwipesIcon = loadImage("furySwipes.png");
+  MagicalStrikeIcon = loadImage("magicalStrike.png");
+  ShieldIcon = loadImage("shield.png");
+  SweepingStrikeIcon = loadImage("sweepingStrike.png");
   arena = new Dungeon(20, 20, seed, tileSize);
   trackInventory = 0;
   dialogue = new DialogueBox();
@@ -38,8 +43,8 @@ void draw() {
     }
   } else if (MODE==1) {
     arena.draw();
+    textBox();    
     sideScreen();
-    textBox();
   } else if (MODE==2) {
     scoreScreen();
   }
@@ -86,48 +91,56 @@ void keyPressed() {
     }
     if (keyCode==97) {
       if (arena.getMap()[guy.getX()-1][guy.getY()+1].occupant() != null) {
+        guy.startAttack(12, 18, 1);
         guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()+1].occupant());
       } else if (!arena.getMap()[guy.getX()-1][guy.getY()+1].isWall()) {
         guy.setXY(guy.getX()-1, guy.getY()+1);
       }
     } else if (keyCode==98) {
       if (arena.getMap()[guy.getX()][guy.getY()+1].occupant() != null) {
+        guy.startAttack(15, 21, 1);
         guy.attack(arena, arena.getMap()[guy.getX()][guy.getY()+1].occupant());
       } else if (!arena.getMap()[guy.getX()][guy.getY()+1].isWall()) {
         guy.setY(guy.getY()+1);
       }
     } else if (keyCode==99) {
       if (arena.getMap()[guy.getX()+1][guy.getY()+1].occupant() != null) {
+        guy.startAttack(18, 24, 1);
         guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()+1].occupant());
       } else if (!arena.getMap()[guy.getX()+1][guy.getY()+1].isWall()) {
         guy.setXY(guy.getX()+1, guy.getY()+1);
       }
     } else if (keyCode==100) {
       if (arena.getMap()[guy.getX()-1][guy.getY()].occupant() != null) {
+        guy.startAttack(9, 15, 1);
         guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()].occupant());
       } else if (!arena.getMap()[guy.getX()-1][guy.getY()].isWall()) {
         guy.setX(guy.getX()-1);
       }
     } else if (keyCode==102) {
       if (arena.getMap()[guy.getX()+1][guy.getY()].occupant() != null) {
+        guy.startAttack(21, 27, 1);
         guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()].occupant());
       } else if (!arena.getMap()[guy.getX()+1][guy.getY()].isWall()) {
         guy.setX(guy.getX()+1);
       }
     } else if (keyCode==103) {
       if (arena.getMap()[guy.getX()-1][guy.getY()-1].occupant() != null) {
+        guy.startAttack(6, 12, 1);
         guy.attack(arena, arena.getMap()[guy.getX()-1][guy.getY()-1].occupant());
       } else if (!arena.getMap()[guy.getX()-1][guy.getY()-1].isWall()) {
         guy.setXY(guy.getX()-1, guy.getY()-1);
       }
     } else if (keyCode==104) {
       if (arena.getMap()[guy.getX()][guy.getY()-1].occupant() != null) {
+        guy.startAttack(3, 9, 1);
         guy.attack(arena, arena.getMap()[guy.getX()][guy.getY()-1].occupant());
       } else if (!arena.getMap()[guy.getX()][guy.getY()-1].isWall()) {
         guy.setY(guy.getY()-1);
       }
     } else if (keyCode==105) {
       if (arena.getMap()[guy.getX()+1][guy.getY()-1].occupant() != null) {
+        guy.startAttack(0, 6, 1);
         guy.attack(arena, arena.getMap()[guy.getX()+1][guy.getY()-1].occupant());
       } else if (!arena.getMap()[guy.getX()+1][guy.getY()-1].isWall()) {
         guy.setXY(guy.getX()+1, guy.getY()-1);
@@ -169,13 +182,18 @@ void sideScreen() {
     }
     image(guy.inv.get(i).getImage(), 560 + (i % 4) * 100, height / 4 + 200 + (i / 4) * 100, 100, 100);
   }
-  textAlign(LEFT);
+  textAlign(CENTER);
   fill(255);
-  text("z \n10 MP", 560, height / 4 + 120);
-  text("x \n10 MP", 660, height / 4 + 120);
-  text("c \n10 MP", 760, height / 4 + 120);
-  text("v \n10 MP", 860, height / 4 + 120);
-  fill(50, 50, 50);
+  textSize(16);
+  text("(z) 10 MP", 610, height / 4 + 200);
+  text("(x) 10 MP", 710, height / 4 + 200);
+  text("(c) 10 MP", 810, height / 4 + 200);
+  text("(v) 15 MP", 910, height / 4 + 200);
+  fill(255, 50, 50, 100);
+  image(FurySwipesIcon, 567, height / 4 + 100, 85, 85);
+  image(MagicalStrikeIcon, 667, height / 4 + 100, 85, 85);
+  image(ShieldIcon, 767, height / 4 + 100, 85, 85);
+  image(SweepingStrikeIcon, 867, height / 4 + 100, 85, 85);
   if (guy.furySwipes) {
     rect(560, height / 4 + 100, 100, 100);
   }
@@ -194,7 +212,7 @@ void sideScreen() {
   image(guy.getImage(), 560, height / 4, 100, 100);
   text(guy.getName() + " the Level " + guy.getLVL() + " Adventurer", 660, height / 4); 
   text(guy.getHP() + " / " + guy.getMaxHP() + " HP, " + guy.getMP() + " / " + guy.getMaxMP() + " MP", 660, height / 4 + 20); 
-  text(guy.getSTR() + "STR, " + guy.getEXP() + " / " + guy.getMaxEXP() + " EXP" , 660, height / 4 + 40);  
+  text(guy.getSTR() + "STR, " + guy.getEXP() + " / " + guy.getMaxEXP() + " EXP", 660, height / 4 + 40);  
   text(guy.getDEX() + "DEX", 660, height / 4 + 60);  
   text(guy.getINT() + "INT", 660, height / 4 + 80);  
   imageMode(CENTER);
@@ -227,7 +245,7 @@ void textBox() {
   }
   textAlign(LEFT);
   fill(0);
-  textSize(24);
+  textSize(20);
   text(dialogue.toString(), 0, 600);
 }  
 

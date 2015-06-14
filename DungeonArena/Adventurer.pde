@@ -1,6 +1,6 @@
 class Adventurer extends Being {
 
-  private int LVL, MP, maxMP, EXP, maxEXP, PTS, steps;
+  private int LVL, MP, maxMP, EXP, maxEXP, PTS, steps, slashi, slashf, slashInterval, slashCurrent;
   protected Inventory inv;// = new Inventory(20);
   private Stats stats, equiptment;
   protected boolean furySwipes, magicalStrike, shield, sweepingStrike;
@@ -20,15 +20,14 @@ class Adventurer extends Being {
     setMaxMP(getMP());
     setMaxEXP(40);
     steps = 0;
-    /*
-    slash = new PImage[4];
-     slash[0] = loadImage("slashQ1.png");
-     slash[1] = loadImage("slashQ2.png");
-     slash[2] = loadImage("slashQ3.png");
-     slash[3] = loadImage("slashQ4.png");*/
+    slash = new PImage[24];
+    for (int s = 0; s < slash.length; s++) {
+      slash[s] = loadImage("slash" + (s * 15) + ".png");
+    }
     magicalStrike = false;
     shield = false;
     sweepingStrike = false;
+    slashCurrent = -1;
   }
 
   Adventurer(String name, int x, int y, PImage i, PImage[] imgs) {
@@ -38,6 +37,20 @@ class Adventurer extends Being {
   void draw() {
     imageMode(CENTER);
     image(W, tileSize*(3.5), tileSize*(3.5), 0.8*tileSize, 0.8*tileSize);
+    if (slashCurrent >= 0) {
+      image(slash[slashCurrent % slash.length], tileSize*(3.5), tileSize*(3.5), 3.5*tileSize, 3.5*tileSize);
+      slashCurrent += slashInterval;  
+      if (slashCurrent >= slashf) {
+        slashCurrent = -1;
+      }
+    }
+  }
+
+  void startAttack(int start, int end, int interval) {
+    slashi = start;
+    slashCurrent = slashi;
+    slashf = end;
+    slashInterval = interval;
   }
 
   int getSTR() {
@@ -142,13 +155,12 @@ class Adventurer extends Being {
       sweepingStrike(d);
     } else if (isInRange(other, 1) && Math.random() < Math.pow((double)getDEX() / (double)(getDEX() + 2), 2)) {
       other.setHP(other.getHP() - getSTR());
-      //  imageMode(CENTER);
     }
     if (other.getHP() <= 0) {
       other.die(d);
       setEXP(getEXP() + 20);
-      if (getEXP() >= getMaxEXP()){
-       levelUp(); 
+      if (getEXP() >= getMaxEXP()) {
+        levelUp();
       }
     }
   }
@@ -191,6 +203,7 @@ class Adventurer extends Being {
 
   void sweepingStrike(Dungeon d) {
     sweepingStrike = false;
+    startAttack(0, slash.length, 3);
     for (int r = -1; r < 2; r++) {
       if (getY() + r >= 0 && getY() + r < d.getWidth()) {
         for (int c = -1; c < 2; c++) {

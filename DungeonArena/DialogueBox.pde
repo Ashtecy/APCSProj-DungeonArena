@@ -4,9 +4,9 @@ public class DialogueBox {
   protected String str;
 
   DialogueBox() {
-    txt = new String[6];
-    for (int i = 0; i < 3; i++){
-     add(""); 
+    txt = new String[7];
+    for (int i = 0; i < 5; i++) {
+      add("");
     }
     add("Welcome to DungeonArena");
     add("NUMPAD to move, Q and W to navigate the inventory, E to equipt or use items");
