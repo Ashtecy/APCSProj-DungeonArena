@@ -43,3 +43,7 @@ June 7, 2015 The player can attack and dead beings will drop items. Ending scree
 June 8, 2015 Finished adding the abilities.
 
 June 12, 2015 Improved loading speed.
+
+June 13, 2015 Finished crappy animation and player log.
+
+June 14, 2015 Fixed a bug with picking up items.
