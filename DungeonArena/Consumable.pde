@@ -8,6 +8,9 @@ class Consumable extends Item {
     if (b.getHP() < b.getMaxHP()) {
       b.setHP(b.getHP() + 1 + (int)(Math.random() * (b.getMaxHP() - 1 - b.getHP())));
     }
+    if (b.getMP() < b.getMaxMP()){
+      b.setMP(b.getMP() + 1 + (int)(Math.random() * (b.getMaxMP() - 1 - b.getMP())));
+    }
     if (Math.random() < 0.1) {
       b.setSTR(b.getSTR() + 1);
     }

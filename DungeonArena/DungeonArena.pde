@@ -5,7 +5,7 @@ protected long seed;
 protected Random r =  new Random();
 protected int tileSize=80;
 protected int trackInventory;
-protected PImage Background,Title, P1, P2, L, S, T, FurySwipesIcon, MagicalStrikeIcon, ShieldIcon, SweepingStrikeIcon;
+protected PImage Background, Title, P1, P2, L, S, T, FurySwipesIcon, MagicalStrikeIcon, ShieldIcon, SweepingStrikeIcon;
 protected DialogueBox dialogue;
 
 void setup() {
@@ -34,7 +34,7 @@ void draw() {
   if (MODE==0) {
     background(0);
     imageMode(CENTER);
-    image(Background,520,400,700,700);
+    image(Background, 520, 400, 700, 700);
     imageMode(CENTER);
     image(Title, 480, 150, 850, 120);
     Button play = new Button(P1, P2, 480, 450);
@@ -67,8 +67,8 @@ void keyPressed() {
       Item topDrop = arena.getTile(x, y).removeDrop();
       if (topDrop != null  && guy.inv.size() < guy.inv.getCap()) {
         guy.pickUp(topDrop);
-        if (guy.inv.size() >= guy.inv.getCap()){
-                 arena.getTile(x,y).addDrop(topDrop); 
+        if (guy.inv.size() >= guy.inv.getCap()) {
+          arena.getTile(x, y).addDrop(topDrop);
         }
       }
     }
@@ -157,8 +157,9 @@ void keyPressed() {
     if (guy.getHP() <= 0) {
       MODE = 2;
     }
-    if(arena.getNemesis().getHP()<=0){
+    if (arena.getNemesis().getHP()<=0) {
       arena.getNemesis().die(arena);
+      MODE = 2;
     }
   } else if (MODE == 2) {
     if (keyCode == 32) {
@@ -238,7 +239,11 @@ void scoreScreen() {
   fill(0, 0, 0);
   textAlign(CENTER);
   image(Title, 760, 100, 250, 80);
-  text(arena.getGuy().getName() + " the Adventurer, may he rest in pieces", width / 2, height / 2 + 20); 
+  if (arena.getGuy().getHP() <= 0) {
+    text("Here lies " + arena.getGuy().getName() + " the Adventurer, may he rest in pieces", width / 2, height / 2 + 20);
+  }else{
+    text("BEHOLD: " + arena.getGuy().getName() + " the Adventurer, slayer of fools, defender of all", width / 2, height / 2 + 20);
+  }
   text(arena.getGuy().getHP() + " / " + arena.getGuy().getMaxHP() + " HP", width / 2, height / 2 + 40); 
   text(arena.getGuy().getSTR() + " STR", width / 2, height / 2 + 60);  
   text(arena.getGuy().getDEX() + " DEX", width / 2, height / 2 + 80);  
