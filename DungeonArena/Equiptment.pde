@@ -2,8 +2,8 @@ class Equiptment extends Item {
 
   protected Stats stats;
 
-  Equiptment(String name, int setType, int xi, int yi) {
-    super("Equiptment", setType, xi, yi);
+  Equiptment(String name, int setType, int xi, int yi, PImage[] i) {
+    super("Equiptment", setType, xi, yi, i);
     stats = new Stats();
     if (setType != 6) {
       setSTR((int)(Math.random() * 5));

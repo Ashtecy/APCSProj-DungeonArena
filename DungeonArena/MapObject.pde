@@ -8,7 +8,12 @@ class MapObject {
   MapObject(String name, int x, int y) {
     setXY(x, y);
     this.name = name;
-    setImage("mace.png");
+  }
+
+  MapObject(String name, int x, int y, PImage i) {
+    setXY(x, y);
+    setImage(i);
+    this.name = name;
   }
 
   int getX () {
@@ -40,6 +45,10 @@ class MapObject {
     setY(newY);
   }
 
+  void setImage(PImage i) {
+    W = i;
+  }
+
   void setImage(String src) {
     W = loadImage(src);
   }
@@ -53,9 +62,9 @@ class MapObject {
     image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
   }
 
-  void draw(int xi, int yi) {
+  void draw(int x, int y) {
     imageMode(CENTER);
-    image(W, tileSize*xi+tileSize/2, tileSize*yi+tileSize/2, 0.75*tileSize, 0.75*tileSize);
+    image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
   }
 }
 

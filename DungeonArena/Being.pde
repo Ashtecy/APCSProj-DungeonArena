@@ -1,18 +1,25 @@
 abstract class Being extends MapObject {
 
   private Dungeon dun;
+  private Item drop;
   private int maxHP, HP;
   private boolean isAlive;
   private int range, sight;
 
-  Being() {
-    this("", 10, 10);
+  Being(PImage i, PImage[] images) {
+    this("", 10, 10, i, images);
   }
 
-  Being(String n, int x, int y) {
-    super(n, x, y);
+  Being(String n, int x, int y, PImage i, PImage[] images) {
+    super(n, x, y, i);
     setMaxHP(20);
     setHP(20);
+    if (Math.random() < 0.85) {
+      drop = new Consumable(0, 0, images);
+    } else {
+      drop = new Equiptment("Drop", 1 + (int)(Math.random() * 5), getX(), getY(), images);
+    }
+    drop.pickUp();
     isAlive = true;
     range = 1;
     sight = 3;
@@ -94,14 +101,11 @@ abstract class Being extends MapObject {
   }
 
   void die(Dungeon d) {
-    if (Math.random() < 0.25) {
-      d.getTile(getX(), getY()).addDrop(new Consumable(getX(), getY()));
-    }
-    if (Math.random() < 0.05) {
-      d.getTile(getX(), getY()).addDrop(new Equiptment("Stolen Armor", (int)(1 + Math.random() * 5), getX(), getY()));
+    if (Math.random() < 0.5) {
+      d.getTile(getX(), getY()).addDrop(drop);
     }
     d.getTile(getX(), getY()).setOccupant(null);
-    for (int i = 0; i < d.getMonsters().size(); i++) {
+    for (int i = 0; i < d.getMonsters ().size(); i++) {
       if (d.getMonsters().get(i).equals(this)) {
         d.getMonsters().remove(i);
       }
@@ -114,6 +118,14 @@ abstract class Being extends MapObject {
 
   Tile getTile(Dungeon d, int x, int y) {
     return d.getTile(x, y);
+  }
+
+  void draw(int x, int y) {
+    imageMode(CENTER);
+    image(W, tileSize*x+tileSize/2, tileSize*y+tileSize/2, 0.75*tileSize, 0.75*tileSize);
+    fill(255);
+    textAlign(CENTER);
+    text(getHP() + " HP", tileSize*x + tileSize/2, tileSize*y + tileSize);
   }
 }     
 

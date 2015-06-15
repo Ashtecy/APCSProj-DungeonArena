@@ -9,6 +9,9 @@ class Dungeon {
   protected int tileSize;
   protected PImage W1 = loadImage("wall.png");
   protected PImage W2 = loadImage("floor.png");
+  protected PImage man = loadImage("man.png");
+  protected PImage creature = loadImage("creature.png");
+  protected PImage[] items;
 
   Dungeon(int rows, int cols, long seed, int tileSize) {
     this.rows=rows;
@@ -16,16 +19,32 @@ class Dungeon {
     this.tileSize=tileSize;
     monsters = new ArrayList<Creature>();
     generateMap();  
-    spawn();
-    while (monsters.size () < 5) {
-      int x=r.nextInt(rows-1)+1;
-      int y=r.nextInt(cols-1)+1;
-      if (!map[x][y].isWall() && map[x][y].occupant == null) {
-        map[x][y].setOccupant(new Creature("Creature", 1, x, y));
-        monsters.add((Creature)map[x][y].occupant());
+    items = new PImage[7];
+    items[0] = loadImage("potion.png");
+    items[1] = loadImage("helm.png");
+    items[2] = loadImage("chest.png");
+    items[3] = loadImage("arms.png");
+    items[4] = loadImage("legs.png");
+    items[5] = loadImage("weapon.png");
+    items[6] = loadImage("blank.png");
+    for (int x = 1; x < rows; x++) {
+      for (int y = 1; y < cols; y++) {
+        if (!map[x][y].isWall() && map[x][y].occupant == null) {
+          if (Math.random() < 0.1) {
+            map[x][y].setOccupant(new Creature("Creature", 1, x, y, creature, items));
+            monsters.add((Creature)map[x][y].occupant());
+          }
+          if (Math.random() < 0.1) {
+            map[x][y].addDrop(new Consumable(x, y, items));
+          }
+          if (Math.random() < 0.02) {
+            map[x][y].addDrop(new Equiptment("ASD", 1 + (int)(Math.random() * 5), x, y, items));
+          }
+        }
       }
     }
-  }       
+    spawn();
+  }
 
   void generateMap() {
     map = new Tile[rows][cols];
@@ -52,14 +71,14 @@ class Dungeon {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall() && !isTrapped(x,y)) {
-        guy = new Adventurer("Guy", x, y);
+        guy = new Adventurer("Guy", x, y,man,items);
       }
     }
     while (Al==null) {
       int x=r.nextInt(rows-1)+1;
       int y=r.nextInt(cols-1)+1;
       if (!map[x][y].isWall() && !isTrapped(x,y)) {
-        Al = new Nemesis(0, x, y);
+        Al = new Nemesis(0, x, y,man,items);
       }
     }
   }
@@ -84,6 +103,7 @@ class Dungeon {
     int cY = guy.getY()-3;
     for (int i=cX; i<cX+7; i++) {
       for (int j=cY; j<cY+7; j++) {
+
         if (i<0||j<0||i>rows-1||j>cols-1) {
           camera[i-cX][j-cY]=temp;
         } else {
@@ -109,9 +129,17 @@ class Dungeon {
   Adventurer getGuy() {
     return guy;
   }
+  
+  Adventurer getNemesis() {
+    return Al;
+  }
 
   Tile[][] getMap() {
     return map;
+  }
+
+  Tile[][] getCamera() {
+    return camera;
   }
 
   Tile getTile(int xpos, int ypos) {
@@ -132,9 +160,9 @@ class Dungeon {
     }
     Al.act(this);
   }
-  
-  ArrayList<Creature> getMonsters(){
-   return monsters; 
+
+  ArrayList<Creature> getMonsters() {
+    return monsters;
   }
 }
 

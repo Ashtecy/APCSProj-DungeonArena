@@ -11,9 +11,11 @@ class Inventory {
   protected Stats equiptment;
   protected ArrayList<Item> items;
   protected int cap;
+  protected PImage[] itemImages;
 
-  Inventory (int size) {
-    helm = arms = legs = chest = weapon = new Equiptment("Nothing", NAKED, 6, 0);
+  Inventory (int size, PImage[] imgs) {
+    itemImages = imgs;
+    helm = arms = legs = chest = weapon = new Equiptment("Nothing", NAKED, 6, 0, itemImages);
     cap = size;
     items = new ArrayList<Item>();
     equiptment = new Stats();
@@ -30,6 +32,17 @@ class Inventory {
       Item removed = items.remove(inInd);
       removed.setXY(x, y);
       removed.drop(t);
+      if (removed.equals(helm)) {
+        helm = new Equiptment("Nothing", NAKED, 6, 0, itemImages);
+      } else if (removed.equals(chest)) {
+        chest =new Equiptment("Nothing", NAKED, 6, 0, itemImages);
+      } else if (removed.equals(arms)) {
+        arms = new Equiptment("Nothing", NAKED, 6, 0, itemImages);
+      } else if (removed.equals(legs)) {
+        legs = new Equiptment("Nothing", NAKED, 6, 0, itemImages);
+      } else if (removed.equals(weapon)) {
+        weapon = new Equiptment("Nothing", NAKED, 6, 0, itemImages);
+      }
     }
   }
 
@@ -85,6 +98,10 @@ class Inventory {
 
   int size() {
     return items.size();
+  }
+
+  int getCap() {
+    return cap;
   }
 
   Equiptment getHelm() {

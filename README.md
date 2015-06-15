@@ -39,3 +39,7 @@ June 4, 2015 Better movement. Added a score screen as well, but it doesn't hold 
 June 6, 2015 Player can pick up drops.
 
 June 7, 2015 The player can attack and dead beings will drop items. Ending screen added.
+
+June 8, 2015 Finished adding the abilities.
+
+June 12, 2015 Improved loading speed.
